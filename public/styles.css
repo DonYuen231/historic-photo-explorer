@@ -1,0 +1,102 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	line-height: 1.6;
+	color: #1f2328;
+	background: #f6f8fa;
+}
+
+main {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 24px 20px 48px;
+}
+
+a {
+	color: #0b5cad;
+}
+
+fieldset {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	padding: 20px;
+	border: 1px solid #d0d7de;
+	border-radius: 8px;
+	background: #fff;
+}
+
+legend {
+	font-weight: 600;
+	padding: 0 6px;
+}
+
+.field {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.field label {
+	width: 80px;
+	font-weight: 500;
+}
+
+.field input {
+	flex: 1;
+	padding: 8px 10px;
+	font: inherit;
+	border: 1px solid #d0d7de;
+	border-radius: 6px;
+}
+
+button {
+	align-self: flex-start;
+	padding: 8px 20px;
+	font: inherit;
+	font-weight: 600;
+	color: #fff;
+	background: #0b5cad;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+button:hover,
+button:focus-visible {
+	background: #084a8c;
+}
+
+.hint,
+.summary,
+.source {
+	color: #57606a;
+	font-size: 0.9rem;
+}
+
+.photo {
+	margin: 24px 0;
+	padding: 20px;
+	background: #fff;
+	border: 1px solid #d0d7de;
+	border-radius: 8px;
+}
+
+.photo h2 {
+	margin-top: 0;
+	font-size: 1.2rem;
+}
+
+.photo img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	margin: 0 auto 12px;
+	border-radius: 4px;
+}

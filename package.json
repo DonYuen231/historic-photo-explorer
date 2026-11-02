@@ -1,0 +1,24 @@
+{
+  "name": "historic-photo-explorer",
+  "version": "1.0.0",
+  "description": "Searches the Library of Congress photo archive and uses the Claude API to describe historical photos for visually impaired readers.",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "node index.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20.12"
+  },
+  "keywords": [
+    "library-of-congress",
+    "claude",
+    "anthropic",
+    "accessibility",
+    "api-mashup",
+    "nodejs"
+  ],
+  "author": "DonYuen231",
+  "license": "MIT"
+}

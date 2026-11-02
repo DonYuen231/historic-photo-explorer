@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Historic Photo Explorer</title>
+		<link rel="stylesheet" href="/styles.css" />
+	</head>
+	<body>
+		<main>
+			<h1>Historic Photo Explorer</h1>
+			<p>
+				Search the <strong>Library of Congress</strong> photo archive by subject and location.
+				The matching images are sent to <strong>Claude</strong>, which writes a detailed description
+				of each one so that historical photos are accessible to blind and visually impaired readers.
+			</p>
+
+			<form action="/search" method="get">
+				<fieldset>
+					<legend>Search the photo archive</legend>
+					<div class="field">
+						<label for="subject">Subject</label>
+						<input id="subject" name="subject" type="text" maxlength="100" required
+							placeholder="e.g. bridges, farming, railroads" />
+					</div>
+					<div class="field">
+						<label for="location">Location</label>
+						<input id="location" name="location" type="text" maxlength="100" required
+							placeholder="e.g. New York, Alabama" />
+					</div>
+					<button type="submit">Search</button>
+					<p class="hint">Searching can take up to a minute while Claude studies the photos.</p>
+				</fieldset>
+			</form>
+		</main>
+	</body>
+</html>
