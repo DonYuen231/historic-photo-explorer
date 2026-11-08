@@ -82,6 +82,7 @@ Settings are read from environment variables or a `.env` file:
 │   ├── cache.js        # In-memory cache with expiry
 │   └── views.js        # HTML rendering with escaping
 ├── public/             # Static search page and stylesheet
+├── eval/               # Description quality evaluation (see "Evaluation")
 └── test/               # Unit tests (node:test)
 ```
 
@@ -92,6 +93,82 @@ npm test
 ```
 
 Runs the unit tests with Node's built-in test runner. They don't make network calls.
+
+## Evaluation
+
+Unit tests check the code. They can't tell me whether the descriptions are any good, so I scored them by hand, changed the app based on what I found, and scored again.
+
+### Method
+
+I picked 20 Library of Congress photos as 4 searches of 5: portraits (easy), signs with text (medium), crowds and news photos (hard), and bird's-eye prints and maps (hard). `node eval/run.js <version>` sends each group through the app's own download and Claude steps (same prompt, same model, same 5-photo batches). Every photo was chosen because a LoC cataloger had written a summary of what it shows ("Photograph shows…"). That summary is never sent to Claude, so I could use it as a human reference. Each description was scored 1 to 5 on:
+
+- **Accuracy:** is everything it says actually visible in the photo or stated in the catalog record? (5 = nothing unsupported, 3 = one unsupported or wrong claim, 1 = describes things that aren't there)
+- **Usefulness to a blind reader:** does the main subject come first, in plain words, with any visible text read out? (5 = yes, 1 = vague, buried or confusing)
+- **Matches reference:** does it cover the key facts in the cataloger's summary? A reference fact that is wrong doesn't count against it (in photo 3 the cataloger wrote "purse" but it's a wicker basket, and the model got it right).
+
+Claude drafted the scores; I then checked each one against the image ([review sheets](eval/), [v1 scores](eval/scores-v1.csv), [v2 scores](eval/scores-v2.csv)). Model: `claude-opus-5-5`, November 2026.
+
+### Round 1 (v1): what I found
+
+1. **Image size mattered more than how hard the photo was.** For 5 of the 20 photos, LoC only offers a 150-pixel thumbnail, and the app sent it anyway. Those 5 averaged 2.8 for accuracy, against 4.8 for the rest, and they included every serious mistake. On photo 14 the model said a stretcher carried "presumably the victim"; the record says it was the gang's lawyer. The model said the image was too small in only 2 of the 5 cases.
+2. **It filled gaps with plausible history.** It linked a 1966 burning squad car to "the July 1966 West Side unrest", but the record says it was a gang fight on the northwest side. On two photos it replaced the catalog date with its own guess, without any visible evidence.
+3. **It read text in images very well, but didn't always put it first.** All four signs were transcribed correctly, down to an artist's signature and a tiny sticker. On the dense prints, though, the title and banner text only appeared at the end of the "notable details" list.
+
+### Changes (v2)
+
+- **Low-resolution check** ([src/image-size.js](src/image-size.js), [src/loc.js](src/loc.js)): the app reads each image's width and height from its bytes. If the longest side is under 400px, the photo is marked low resolution. Claude is told so in the prompt, and the results page shows a notice next to the photo.
+- **Stricter prompt** ([src/claude.js](src/claude.js)): it now says to start with the main subject and any text written on the image; to name people, places or events only when the catalog title or visible text supports it; to use the catalog date unless something visible clearly contradicts it; and, for low-resolution photos, to describe less and say why.
+
+### Round 2 (v2): results
+
+Same 20 photos, same model, same scoring. Each cell is v1 → v2.
+
+<details>
+<summary>Scores for all 20 photos</summary>
+
+| # | Group | Photo | Accuracy (v1 → v2) | Usefulness (v1 → v2) | Matches reference (v1 → v2) |
+| --- | --- | --- | --- | --- | --- |
+| 1 | A | Harriet Tubman standing portrait | 4 → 5 | 4 → 4 | 5 → 5 |
+| 2 | A | Woman with pearls and gloves | 5 → 5 | 4 → 4 | 5 → 5 |
+| 3 | A | Woman holding a newspaper | 5 → 5 | 4 → 4 | 5 → 5 |
+| 4 | A | Family portrait NYC *(150px)* | 3 → 4 | 2 → 3 | 2 → 2 |
+| 5 | A | Two men on the sidewalk | 5 → 5 | 4 → 4 | 5 → 5 |
+| 6 | B | Bloom Jeweler neon clock sign | 5 → 5 | 5 → 5 | 4 → 3 |
+| 7 | B | Castle Clinton sign | 5 → 5 | 5 → 5 | 5 → 5 |
+| 8 | B | Rancho Luna social club mural | 5 → 5 | 5 → 5 | 5 → 5 |
+| 9 | B | Cuchifrito No. 1 Bar B.Q. sign | 5 → 5 | 5 → 5 | 5 → 5 |
+| 10 | B | Muhammad Ali signing autographs *(150px)* | 4 → 5 | 3 → 3 | 2 → 2 |
+| 11 | C | Communist parade in Chicago | 4 → 5 | 4 → 4 | 3 → 3 |
+| 12 | C | Oak Street Beach crowd | 5 → 5 | 5 → 4 | 5 → 5 |
+| 13 | C | American Derby 1904 panorama | 5 → 5 | 4 → 5 | 5 → 5 |
+| 14 | C | Paddy Murray shooting (two photos) *(150px)* | 2 → 4 | 2 → 3 | 2 → 2 |
+| 15 | C | Squad car set afire 1966 *(150px)* | 2 → 4 | 3 → 3 | 3 → 3 |
+| 16 | D | Bird's-eye view of Philadelphia 1872 | 5 → 5 | 4 → 5 | 4 → 4 |
+| 17 | D | Ruins of Pittsburgh after the 1845 fire | 5 → 5 | 5 → 5 | 5 → 4 |
+| 18 | D | Diamond Street from above *(150px)* | 3 → 5 | 3 → 3 | 4 → 4 |
+| 19 | D | Chestnut Street Philadelphia | 4 → 5 | 4 → 4 | 3 → 3 |
+| 20 | D | Topographic view of Reading 1881 | 5 → 5 | 3 → 4 | 4 → 4 |
+
+Notes on each score are in [eval/scores-v1.csv](eval/scores-v1.csv) and [eval/scores-v2.csv](eval/scores-v2.csv). Regenerate these tables with `node eval/summarize.js v1 v2`.
+</details>
+
+| Subset | Photos | Accuracy (v1 → v2) | Usefulness (v1 → v2) | Matches reference (v1 → v2) |
+| --- | --- | --- | --- | --- |
+| **All** | 20 | 4.3 → 4.8 | 3.9 → 4.1 | 4.0 → 4.0 |
+| Easy (group A) | 5 | 4.4 → 4.8 | 3.6 → 3.8 | 4.4 → 4.4 |
+| Hard (groups C, D) | 10 | 4.0 → 4.8 | 3.7 → 4.0 | 3.8 → 3.7 |
+| Full-size image | 15 | 4.8 → 5.0 | 4.3 → 4.5 | 4.5 → 4.4 |
+| 150px thumbnail only | 5 | 2.8 → 4.4 | 2.6 → 3.0 | 2.6 → 2.6 |
+
+1. **Accuracy went up the most where it was worst.** On the 5 thumbnails it went from 2.8 to 4.4. All 5 were flagged correctly. The model stopped guessing (no more "the victim", no invented riot, no "late-1920s automobiles") and said what it couldn't see. On full-size images every description scored 5 for accuracy.
+2. **Matching the reference didn't improve (4.0 → 4.0).** Being careful stops the model from making things up, but it can't make a 150px image show Muhammad Ali or two dogs. That limit is in the source data, not the prompt.
+3. **The stricter prompt had costs.** It removed some correct context: the Pittsburgh print no longer says the ruins came from a fire, and the Bloom Jeweler sign lost its diamond-ring hint. It also added filler: many descriptions now start with "no text is visible on the image" or "identified by the catalog title", which a screen-reader user has to sit through.
+
+### What I'd change next
+
+- **Only mention text when there is some.** Add "If there's no text on the image, don't say so" to the prompt, to remove the filler.
+- **Allow well-known context from the title.** Let the model explain an event the title clearly refers to (a print titled "ruins of Pittsburgh" can mention the 1845 fire), while still not linking a photo to an event the title doesn't mention.
+- **Make the eval less dependent on one person.** Have a second person score a sample of photos to check that the scores agree, and add photos where the main subject is a person the reference names, to test identification more directly.
 
 ## Error handling
 

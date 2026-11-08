@@ -7,12 +7,21 @@
 
 const { getJson, getBuffer } = require("./http-client");
 const config = require("./config");
+const { imageSize } = require("./image-size");
 
 // The /photos/ endpoint covers the "Photos, Prints, Drawings" format.
 // (Querying /search/ with a format facet redirects here and drops other facets.)
 const PHOTOS_ENDPOINT = "https://www.loc.gov/photos/";
 
 const SUPPORTED_IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/gif", "image/webp"]);
+
+// Some LoC items only offer a 150px thumbnail. Below this size (longest side, in pixels),
+// the photo is flagged so Claude describes less and the page shows a notice.
+const LOW_RESOLUTION_PX = 400;
+
+function isLowResolution(size) {
+	return Boolean(size) && Math.max(size.width, size.height) < LOW_RESOLUTION_PX;
+}
 
 function buildSearchUrl(subject, location) {
 	const url = new URL(PHOTOS_ENDPOINT);
@@ -77,7 +86,12 @@ function downloadImages(photos, callback) {
 				return next(index + 1);
 			}
 
-			downloaded.push({ ...photo, mediaType, base64: result.buffer.toString("base64") });
+			downloaded.push({
+				...photo,
+				mediaType,
+				base64: result.buffer.toString("base64"),
+				lowResolution: isLowResolution(imageSize(result.buffer)),
+			});
 			next(index + 1);
 		});
 	}
@@ -85,4 +99,4 @@ function downloadImages(photos, callback) {
 	next(0);
 }
 
-module.exports = { buildSearchUrl, extractPhotos, searchPhotos, downloadImages };
+module.exports = { buildSearchUrl, extractPhotos, isLowResolution, searchPhotos, downloadImages };
