@@ -2,7 +2,7 @@
 
 Model: `claude-opus-5-5`. Generated 2026-11-08 by `node eval/run.js v2`.
 
-Score each photo 1 to 5. See the rubric in the README's Evaluation section.
+Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 ## 1. [A] [Portrait of Harriet Tubman]
 

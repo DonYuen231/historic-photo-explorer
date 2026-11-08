@@ -43,7 +43,7 @@ function readScores(file) {
 }
 
 function average(rows, key) {
-	return rows.length ? (rows.reduce((sum, r) => sum + r[key], 0) / rows.length).toFixed(1) : "-";
+	return rows.length ? (rows.reduce((sum, r) => sum + r[key], 0) / rows.length).toFixed(2) : "-";
 }
 
 const SUBSETS = [

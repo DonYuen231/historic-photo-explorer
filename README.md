@@ -102,15 +102,17 @@ Unit tests check the code. They can't tell me whether the descriptions are any g
 
 I picked 20 Library of Congress photos as 4 searches of 5: portraits (easy), signs with text (medium), crowds and news photos (hard), and bird's-eye prints and maps (hard). `node eval/run.js <version>` sends each group through the app's own download and Claude steps (same prompt, same model, same 5-photo batches). Every photo was chosen because a LoC cataloger had written a summary of what it shows ("Photograph shows…"). That summary is never sent to Claude, so I could use it as a human reference. Each description was scored 1 to 5 on:
 
-- **Accuracy:** is everything it says actually visible in the photo or stated in the catalog record? (5 = nothing unsupported, 3 = one unsupported or wrong claim, 1 = describes things that aren't there)
-- **Usefulness to a blind reader:** does the main subject come first, in plain words, with any visible text read out? (5 = yes, 1 = vague, buried or confusing)
-- **Matches reference:** does it cover the key facts in the cataloger's summary? A reference fact that is wrong doesn't count against it (in photo 3 the cataloger wrote "purse" but it's a wicker basket, and the model got it right).
+- **Accuracy:** is everything it says actually in the photo or the catalog record? Omissions don't count here.
+- **Usefulness to a blind reader:** read aloud, would a listener quickly get a clear picture? Main subject first, visible text read out, no filler.
+- **Matches reference:** how much of the cataloger's summary does it also convey? Wrong reference facts are ignored (in photo 3 the cataloger wrote "purse", but it's a wicker basket, and the model got it right).
+
+Every level from 1 to 5 is defined in **[eval/RUBRIC.md](eval/RUBRIC.md)**, with an example from this eval for each.
 
 Claude drafted the scores; I then checked each one against the image ([review sheets](eval/), [v1 scores](eval/scores-v1.csv), [v2 scores](eval/scores-v2.csv)). Model: `claude-opus-5-5`, November 2026.
 
 ### Round 1 (v1): what I found
 
-1. **Image size mattered more than how hard the photo was.** For 5 of the 20 photos, LoC only offers a 150-pixel thumbnail, and the app sent it anyway. Those 5 averaged 2.8 for accuracy, against 4.8 for the rest, and they included every serious mistake. On photo 14 the model said a stretcher carried "presumably the victim"; the record says it was the gang's lawyer. The model said the image was too small in only 2 of the 5 cases.
+1. **Image size mattered more than how hard the photo was.** For 5 of the 20 photos, LoC only offers a 150-pixel thumbnail, and the app sent it anyway. Those 5 averaged 3.2 for accuracy, against 4.8 for the rest, and they included every serious mistake. On photo 14 the model said a stretcher carried "presumably the victim"; the record says it was the gang's lawyer. The model said the image was too small in only 2 of the 5 cases.
 2. **It filled gaps with plausible history.** It linked a 1966 burning squad car to "the July 1966 West Side unrest", but the record says it was a gang fight on the northwest side. On two photos it replaced the catalog date with its own guess, without any visible evidence.
 3. **It read text in images very well, but didn't always put it first.** All four signs were transcribed correctly, down to an artist's signature and a tiny sticker. On the dense prints, though, the title and banner text only appeared at the end of the "notable details" list.
 
@@ -131,22 +133,22 @@ Same 20 photos, same model, same scoring. Each cell is v1 → v2.
 | 1 | A | Harriet Tubman standing portrait | 4 → 5 | 4 → 4 | 5 → 5 |
 | 2 | A | Woman with pearls and gloves | 5 → 5 | 4 → 4 | 5 → 5 |
 | 3 | A | Woman holding a newspaper | 5 → 5 | 4 → 4 | 5 → 5 |
-| 4 | A | Family portrait NYC *(150px)* | 3 → 4 | 2 → 3 | 2 → 2 |
+| 4 | A | Family portrait NYC *(150px)* | 3 → 4 | 2 → 3 | 3 → 3 |
 | 5 | A | Two men on the sidewalk | 5 → 5 | 4 → 4 | 5 → 5 |
-| 6 | B | Bloom Jeweler neon clock sign | 5 → 5 | 5 → 5 | 4 → 3 |
+| 6 | B | Bloom Jeweler neon clock sign | 5 → 5 | 5 → 5 | 4 → 4 |
 | 7 | B | Castle Clinton sign | 5 → 5 | 5 → 5 | 5 → 5 |
 | 8 | B | Rancho Luna social club mural | 5 → 5 | 5 → 5 | 5 → 5 |
 | 9 | B | Cuchifrito No. 1 Bar B.Q. sign | 5 → 5 | 5 → 5 | 5 → 5 |
-| 10 | B | Muhammad Ali signing autographs *(150px)* | 4 → 5 | 3 → 3 | 2 → 2 |
-| 11 | C | Communist parade in Chicago | 4 → 5 | 4 → 4 | 3 → 3 |
-| 12 | C | Oak Street Beach crowd | 5 → 5 | 5 → 4 | 5 → 5 |
+| 10 | B | Muhammad Ali signing autographs *(150px)* | 5 → 5 | 3 → 3 | 2 → 2 |
+| 11 | C | Communist parade in Chicago | 4 → 5 | 4 → 4 | 4 → 4 |
+| 12 | C | Oak Street Beach crowd | 5 → 5 | 5 → 4 | 5 → 4 |
 | 13 | C | American Derby 1904 panorama | 5 → 5 | 4 → 5 | 5 → 5 |
-| 14 | C | Paddy Murray shooting (two photos) *(150px)* | 2 → 4 | 2 → 3 | 2 → 2 |
-| 15 | C | Squad car set afire 1966 *(150px)* | 2 → 4 | 3 → 3 | 3 → 3 |
+| 14 | C | Paddy Murray shooting (two photos) *(150px)* | 2 → 5 | 2 → 3 | 1 → 2 |
+| 15 | C | Squad car set afire 1966 *(150px)* | 2 → 5 | 3 → 3 | 3 → 3 |
 | 16 | D | Bird's-eye view of Philadelphia 1872 | 5 → 5 | 4 → 5 | 4 → 4 |
 | 17 | D | Ruins of Pittsburgh after the 1845 fire | 5 → 5 | 5 → 5 | 5 → 4 |
-| 18 | D | Diamond Street from above *(150px)* | 3 → 5 | 3 → 3 | 4 → 4 |
-| 19 | D | Chestnut Street Philadelphia | 4 → 5 | 4 → 4 | 3 → 3 |
+| 18 | D | Diamond Street from above *(150px)* | 4 → 5 | 3 → 3 | 4 → 4 |
+| 19 | D | Chestnut Street Philadelphia | 4 → 5 | 4 → 4 | 4 → 4 |
 | 20 | D | Topographic view of Reading 1881 | 5 → 5 | 3 → 4 | 4 → 4 |
 
 Notes on each score are in [eval/scores-v1.csv](eval/scores-v1.csv) and [eval/scores-v2.csv](eval/scores-v2.csv). Regenerate these tables with `node eval/summarize.js v1 v2`.
@@ -154,14 +156,14 @@ Notes on each score are in [eval/scores-v1.csv](eval/scores-v1.csv) and [eval/sc
 
 | Subset | Photos | Accuracy (v1 → v2) | Usefulness (v1 → v2) | Matches reference (v1 → v2) |
 | --- | --- | --- | --- | --- |
-| **All** | 20 | 4.3 → 4.8 | 3.9 → 4.1 | 4.0 → 4.0 |
-| Easy (group A) | 5 | 4.4 → 4.8 | 3.6 → 3.8 | 4.4 → 4.4 |
-| Hard (groups C, D) | 10 | 4.0 → 4.8 | 3.7 → 4.0 | 3.8 → 3.7 |
-| Full-size image | 15 | 4.8 → 5.0 | 4.3 → 4.5 | 4.5 → 4.4 |
-| 150px thumbnail only | 5 | 2.8 → 4.4 | 2.6 → 3.0 | 2.6 → 2.6 |
+| **All** | 20 | 4.40 → 4.95 | 3.90 → 4.10 | 4.15 → 4.10 |
+| Easy (group A) | 5 | 4.40 → 4.80 | 3.60 → 3.80 | 4.60 → 4.60 |
+| Hard (groups C, D) | 10 | 4.10 → 5.00 | 3.70 → 4.00 | 3.90 → 3.80 |
+| Full-size image | 15 | 4.80 → 5.00 | 4.33 → 4.47 | 4.67 → 4.53 |
+| 150px thumbnail only | 5 | 3.20 → 4.80 | 2.60 → 3.00 | 2.60 → 2.80 |
 
-1. **Accuracy went up the most where it was worst.** On the 5 thumbnails it went from 2.8 to 4.4. All 5 were flagged correctly. The model stopped guessing (no more "the victim", no invented riot, no "late-1920s automobiles") and said what it couldn't see. On full-size images every description scored 5 for accuracy.
-2. **Matching the reference didn't improve (4.0 → 4.0).** Being careful stops the model from making things up, but it can't make a 150px image show Muhammad Ali or two dogs. That limit is in the source data, not the prompt.
+1. **Accuracy went up the most where it was worst.** On the 5 thumbnails it went from 3.2 to 4.8. All 5 were flagged correctly. The model stopped guessing (no more "the victim", no invented riot, no "late-1920s automobiles") and said what it couldn't see. On full-size images every description scored 5 for accuracy.
+2. **Matching the reference didn't improve (4.15 → 4.10).** Being careful stops the model from making things up, but it can't make a 150px image show Muhammad Ali or two dogs. That limit is in the source data, not the prompt.
 3. **The stricter prompt had costs.** It removed some correct context: the Pittsburgh print no longer says the ruins came from a fire, and the Bloom Jeweler sign lost its diamond-ring hint. It also added filler: many descriptions now start with "no text is visible on the image" or "identified by the catalog title", which a screen-reader user has to sit through.
 
 ### What I'd change next

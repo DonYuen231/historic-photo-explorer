@@ -133,7 +133,7 @@ function writeReview(rows, version) {
 		"",
 		`Model: \`${config.claudeModel}\`. Generated ${new Date().toISOString().slice(0, 10)} by \`node eval/run.js ${version}\`.`,
 		"",
-		"Score each photo 1 to 5. See the rubric in the README's Evaluation section.",
+		"Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).",
 		"",
 	];
 	rows.forEach((r, i) => {
