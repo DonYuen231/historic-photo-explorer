@@ -1,0 +1,354 @@
+{
+	"model": "meta/muse-spark-1.3-contributor",
+	"photos": [
+		{
+			"group": "A",
+			"groupLabel": "Easy: portraits",
+			"title": "[Portrait of Harriet Tubman]",
+			"date": "1895-01-01",
+			"itemUrl": "https://www.loc.gov/item/2018645051/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/ppmsca/54200/54232r.jpg",
+			"lowResolution": false,
+			"description": "The main subject is a woman standing indoors, identified by the catalog title as a portrait of Harriet Tubman. She is standing next to a small upholstered chair with her hands resting on the back of it. She wears a long dark dress with a white collar at the neck and long sleeves, and flat shoes. A dark shawl or coat is draped over the arm of the chair, and a hat rests on the seat. To her left there is a small table covered with a dark cloth. Behind her is a plain wall and a vertical column or door trim. The image is a black and white studio portrait with a patterned carpet on the floor.",
+			"estimatedPeriod": "1895 per catalog date, consistent with clothing and photographic style.",
+			"notableDetails": [
+				"woman with hands clasped on chair back",
+				"long dark dress with white collar",
+				"tassel hanging from chair"
+			],
+			"reference": "Photograph shows a full-length portrait of Harriet Tubman (1820?-1913) looking directly at the camera with folded hands resting on back of an upholstered chair."
+		},
+		{
+			"group": "A",
+			"groupLabel": "Easy: portraits",
+			"title": "[Half-length portrait of a woman looking contemplative]",
+			"date": "1959-01-01",
+			"itemUrl": "https://www.loc.gov/item/2020636732/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/ppmsca/70500/70560r.jpg",
+			"lowResolution": false,
+			"description": "The main subject is a woman standing outdoors on a street. She is shown from the chest up, looking down and to her left with a contemplative expression. She has short curly light-colored hair styled in waves. She wears a light-colored sweater over a turtleneck, multiple strands of pearls around her neck, white gloves held in her hands, bracelets on her wrists, and a watch on her left wrist. A chain strap from a purse hangs from her left arm. In the background, out of focus, there are parked cars, trees, a sidewalk, and a person standing. The image is black and white.",
+			"estimatedPeriod": "1959 per catalog date.",
+			"notableDetails": [
+				"multiple strands of large pearls",
+				"white gloves held together",
+				"curly hairstyle"
+			],
+			"reference": "Photograph shows a half-length portrait of a woman. She wears a sweater, white gloves, and pearls. Her brow is furrowed and she looks down to the left."
+		},
+		{
+			"group": "A",
+			"groupLabel": "Easy: portraits",
+			"title": "[Woman holding a newspaper, three-quarter length portrait]",
+			"date": "1958-01-01",
+			"itemUrl": "https://www.loc.gov/item/2020636554/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/ppmsca/70300/70382r.jpg",
+			"lowResolution": false,
+			"description": "The main subject is a woman walking outdoors holding objects. She is shown from about the knees up, smiling and looking toward the camera. She has short curly light-colored hair and wears sleeveless white dress with V-shaped slits at the neckline, a small cross necklace, and round earrings. In her right hand she holds a folded newspaper and a wicker basket that appears to contain flowers or paper. Behind her, out of focus, there are other people including an older woman with white hair and two men, and a building entrance. The image is black and white.",
+			"estimatedPeriod": "1958 per catalog date.",
+			"notableDetails": [
+				"woman holding folded newspaper",
+				"wicker basket in hand",
+				"white sleeveless dress with cross necklace"
+			],
+			"reference": "Photograph shows a three-quarter length portrait of a woman wearing a dress and holding a newspaper in her left hand. She also has a purse hanging from the same arm."
+		},
+		{
+			"group": "A",
+			"groupLabel": "Easy: portraits",
+			"title": "Family portrait - NYC",
+			"date": "1990",
+			"itemUrl": "https://www.loc.gov/item/2024634253/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/ppmsca/96000/96004_150px.jpg",
+			"lowResolution": true,
+			"description": "The main subject is a group of people posed together indoors, identified by the catalog title as a family portrait in New York City. The image shows several adults and children sitting and standing in a living room setting with couches visible. Detail is limited by the image size and low resolution, so facial features, clothing, and background objects are not clearly visible. The image is black and white and appears as a small thumbnail.",
+			"estimatedPeriod": "1990 per catalog date.",
+			"notableDetails": [
+				"group of adults and children posed together",
+				"indoor living room setting",
+				"detail is limited by low resolution"
+			],
+			"reference": "Photograph shows a family of two fathers, three sons, and two dogs seated in a room."
+		},
+		{
+			"group": "A",
+			"groupLabel": "Easy: portraits",
+			"title": "[Two men, three-quarter length portrait, standing]",
+			"date": "1953-01-01",
+			"itemUrl": "https://www.loc.gov/item/2020636055/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/ppmsca/69800/69800r.jpg",
+			"lowResolution": false,
+			"description": "The main subject is two men standing outdoors talking to each other. The man on the left wears a flat cap, a plaid shirt, and a dark jacket and holds a cigarette or small object near his mouth with smoke visible. The man on the right wears a fedora-style hat, a collared shirt, and a dark jacket and looks at the other man. Both are shown from about the knees up. Behind them is a blurred street background with a dark doorway or wall. The image is black and white with a white border.",
+			"estimatedPeriod": "1953 per catalog date.",
+			"notableDetails": [
+				"man holding cigarette with visible smoke",
+				"both men wearing caps and jackets",
+				"outdoor street setting"
+			],
+			"reference": "Photograph shows man on left smoking and man on right facing him."
+		},
+		{
+			"group": "B",
+			"groupLabel": "Medium: signs and text in the photo",
+			"title": "Neon sign, Westchester Ave., Bronx, Oct. 1970",
+			"date": "1970",
+			"itemUrl": "https://www.loc.gov/item/2018645238/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/vrg/02000/02019r.jpg",
+			"lowResolution": false,
+			"description": "A large weathered neon sign shaped like a ring with a clock in the center. The sign reads BLOOM JEWELER in large raised letters around a round clock face. The sign is designed to look like a diamond ring, with a large faceted diamond shape at the top and a circular band below. The clock in the middle has black numerals and white hands showing about 5 and 13 minutes past 2. The paint is peeling and some neon tubes are broken or missing, and the metal frame is rusted. The sign is mounted on the side of a light-colored building, photographed from below against a bright sky. The image is in color. Estimated from catalog date as 1970.",
+			"estimatedPeriod": "1970 per catalog date",
+			"notableDetails": [
+				"Sign shaped like a diamond ring with clock",
+				"Text reads BLOOM JEWELER",
+				"Visible wear, rust, and missing neon"
+			],
+			"reference": "Photograph shows an unilluminated electric sign for Bloom Jeweler resembling a diamond ring with a clock in the center."
+		},
+		{
+			"group": "B",
+			"groupLabel": "Medium: signs and text in the photo",
+			"title": "Sign at entrance of Castle Clinton",
+			"date": "1952-01-01",
+			"itemUrl": "https://www.loc.gov/item/2020635650/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/ppmsca/69400/69417r.jpg",
+			"lowResolution": false,
+			"description": "A rectangular informational sign mounted on a wooden fence at the entrance of Castle Clinton. The sign reads CASTLE CLINTON NATIONAL MONUMENT REMAINS OF WAR OF 1812 FORT WHICH LATER BECAME THE FAMOUS CASTLE GARDEN, THEATRE AND EMIGRANT LANDING DEPOT, AND FINALLY, THE NEW YORK CITY AQUARIUM. RESTORATION OF FORT RUINS BEGAN IN OCTOBER 1950. WORK WILL CONTINUE AS FUNDS ARE AVAILABLE. NATIONAL PARK SERVICE UNITED STATES DEPT. OF INTERIOR. The sign has white lettering on a dark background with a light border. It is attached to vertical wooden planks, with rough stone blocks visible above the fence. The photograph is black and white and mounted on a light mat with dark corners. Estimated from catalog date as 1952.",
+			"estimatedPeriod": "1952 per catalog date",
+			"notableDetails": [
+				"Sign explains history of Castle Clinton and restoration starting October 1950",
+				"Mounted on wooden fence with stone above",
+				"Black and white print with mat border"
+			],
+			"reference": "Photograph shows sign that reads \"Castle Clinton National Monument. Remains of War of 1812 fort which later became the famous Castle Garden, theatre and emigrant landing depot, and finally, the New York City Aquarium. Restoration of fort ruins began in October 1950. Work will continue as funds are available. - National Park Service United States Dept. of Interior\"."
+		},
+		{
+			"group": "B",
+			"groupLabel": "Medium: signs and text in the photo",
+			"title": "Social club sign, South Bronx, 1970",
+			"date": "1970",
+			"itemUrl": "https://www.loc.gov/item/2014648680/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/vrg/00100/00192v.jpg",
+			"lowResolution": false,
+			"description": "A large hand-painted sign for a social club. At the top the sign reads RANCHO LUNA in large red letters with black shadow, and at the bottom on a smaller white board it reads SOCIAL CLUB. Between the text is a painted landscape scene showing a small wooden house with a brown roof and blue walls on a grassy shore next to water. In the water on the right is a sailboat with two sails, and in the background are low hills and a pale sun or moon in a cloudy sky. The sign is mounted above a doorway with white railing below. A single bare light bulb hangs above the sign. The image is in color. Estimated from catalog date as 1970.",
+			"estimatedPeriod": "1970 per catalog date",
+			"notableDetails": [
+				"Text RANCHO LUNA and SOCIAL CLUB",
+				"Landscape painting with house by water and sailboat",
+				"Light bulb mounted above sign"
+			],
+			"reference": "Photograph shows a mural with the words \"Rancho Luna\" and a river (?) scene."
+		},
+		{
+			"group": "B",
+			"groupLabel": "Medium: signs and text in the photo",
+			"title": "South Bronx sign by Polaco, New York City, 1970",
+			"date": "1970",
+			"itemUrl": "https://www.loc.gov/item/2018645241/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/vrg/07600/07645v.jpg",
+			"lowResolution": false,
+			"description": "A large hand-painted commercial sign for a barbecue restaurant. The sign reads Cuchifrito No 1 in large orange-red script letters with white and black outline at the top, and BAR B.Q in large blue letters with white outline at the bottom. The background painting shows a tropical scene with palm trees on the left, water in the foreground and middle, green foliage, and distant hills under a blue sky with clouds. The artist signature Polaco is visible in the lower right corner. Below the sign is a white metal awning housing with two silver spotlights mounted in the center pointing up at the sign, and a small yellow sticker that reads RONMAR on the left side of the housing. The sign is mounted on a building with a brick wall and window ledge visible above. The image is in color. Estimated from catalog date as 1970.",
+			"estimatedPeriod": "1970 per catalog date",
+			"notableDetails": [
+				"Text Cuchifrito No 1 BAR B.Q",
+				"Tropical landscape with palm trees and water",
+				"Artist signature Polaco and spotlights below"
+			],
+			"reference": "Photograph shows a sign for a barbecue reastaurant Cuchifrito No. 1 Bar B. Q. depicting a tropical landscape."
+		},
+		{
+			"group": "B",
+			"groupLabel": "Medium: signs and text in the photo",
+			"title": "The champ signs",
+			"date": "1964-01-01",
+			"itemUrl": "https://www.loc.gov/item/2005694368/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/cph/3c30000/3c35000/3c35400/3c35417_150px.jpg",
+			"lowResolution": true,
+			"description": "A small low resolution black and white thumbnail image showing a crowd of people gathered indoors. The image appears to show a man at a table signing something while a crowd watches. A sign at the top left is partially readable as THE LIBRARY. Detail is limited by the small image size. Estimated from catalog date as 1964.",
+			"estimatedPeriod": "1964 per catalog date",
+			"notableDetails": [
+				"Crowd gathered around a table",
+				"Person appears to be signing",
+				"Detail limited by low resolution thumbnail"
+			],
+			"reference": "Photograph shows World Heavyweight Boxing Champion, Muhammed Ali (née Cassius Clay) signing autographs outside a New York City movie theater.  Malcolm X is on Ali's right."
+		},
+		{
+			"group": "C",
+			"groupLabel": "Hard: crowds and news photos",
+			"title": "Communists' parade gets O.K. police guard in Chicago",
+			"date": "1930-01-01",
+			"itemUrl": "https://www.loc.gov/item/2012645726/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/cph/3a20000/3a21000/3a21500/3a21586r.jpg",
+			"lowResolution": false,
+			"description": "A very large dense crowd of people fills a city street in an overhead view. The catalog title is Communists' parade gets O.K. police guard in Chicago. The crowd stretches far down the street between buildings on the left and a sidewalk on the right. Most people appear to be men wearing hats such as fedoras and flat caps. At the top right of the image a line of uniformed people is standing across the street. At the bottom right a bright light shines near what appears to be a mounted officer. The setting is an urban street during the day.",
+			"estimatedPeriod": "1930 per catalog date",
+			"notableDetails": [
+				"overhead view looking down the street",
+				"hundreds of people tightly packed and wearing hats",
+				"police line visible in the distance at top right",
+				"bright glare from a light near bottom right"
+			],
+			"reference": "Photograph shows a crowd of demonstrators milling around City Hall in Chicago."
+		},
+		{
+			"group": "C",
+			"groupLabel": "Hard: crowds and news photos",
+			"title": "All Chicago turns to the beach as mercury rises",
+			"date": "1930-01-01",
+			"itemUrl": "https://www.loc.gov/item/2011660937/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/cph/3a30000/3a36000/3a36200/3a36221r.jpg",
+			"lowResolution": false,
+			"description": "A huge crowd of people crowded onto a sandy beach in front of a city skyline. The catalog title is All Chicago turns to the beach as mercury rises. In the foreground and middle ground, hundreds of people are standing, walking, and sitting on the beach. Many are wearing 1920s-1930s style swimsuits. Some children are visible. A lifeguard wearing a dark swimsuit with letters on the front stands in the middle left. Behind the beach there are trees and then several tall multi-story buildings with many windows. The sky is bright. The scene is outdoors on a sunny day.",
+			"estimatedPeriod": "1930 per catalog date",
+			"notableDetails": [
+				"thousands of beachgoers in early swimwear",
+				"tall apartment or hotel buildings lining the shore",
+				"lifeguard standing among the crowd",
+				"people sitting on towels and blankets on the sand"
+			],
+			"reference": "Photograph shows throngs of beach goers almost completely covering the sands of Oak Street Beach; tall office buildings loom in the background."
+		},
+		{
+			"group": "C",
+			"groupLabel": "Hard: crowds and news photos",
+			"title": "The great American derby. Chicago, June 18, 1904",
+			"date": "1904-01-01",
+			"itemUrl": "https://www.loc.gov/item/2012646768/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/cph/3a30000/3a35000/3a35200/3a35285r.jpg",
+			"lowResolution": false,
+			"description": "A wide panoramic view of a horse race at a racetrack. Handwritten text on the image near the bottom center reads The Great American Derby Chicago June 18 1904. The catalog title is the same. The dirt track runs from the middle distance toward the foreground and curves to the left. Several horses and riders are racing in the middle of the track. On both sides of the track there are large crowds of spectators. On the left a large covered grandstand is packed with people. On the right a dense line of people stands along the rail, many wearing light-colored hats and dresses. Trees and low buildings are visible in the background. The image is a black and white print made from three panels joined together.",
+			"estimatedPeriod": "1904 per catalog date and per text visible on image",
+			"notableDetails": [
+				"text on image reads The Great American Derby Chicago June 18 1904",
+				"panoramic format with visible seams between panels",
+				"grandstand full of spectators on the left",
+				"horses racing on a dirt oval with crowds lining both sides"
+			],
+			"reference": "Photograph shows crowd of spectators watching horses running on racetrack."
+		},
+		{
+			"group": "C",
+			"groupLabel": "Hard: crowds and news photos",
+			"title": "Machine gun pumps a period into career of Paddy Murray, gang leader ...",
+			"date": "1926-01-01",
+			"itemUrl": "https://www.loc.gov/item/95510888/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/cph/3c10000/3c14000/3c14600/3c14622_150px.jpg",
+			"lowResolution": true,
+			"description": "A low resolution thumbnail image showing a street scene with a crowd. The catalog title is Machine gun pumps a period into career of Paddy Murray, gang leader. There appears to be an inset circular image in the lower center showing several men carrying a stretcher or body. A larger crowd of people is visible around them on a sidewalk. Detail is limited by the small image size and text on the image is not clearly readable.",
+			"estimatedPeriod": "1926 per catalog date",
+			"notableDetails": [
+				"low resolution thumbnail limits detail",
+				"appears to be a composite with an inset oval image",
+				"group of people gathered on a street",
+				"object that looks like a stretcher being carried"
+			],
+			"reference": "Upper photo shows Paddy Murray lying dead on sidewalk, surrounded by police and crowd of people. Lower photo shows W.W. O'Brien, lawyer for gang, being carried on stretcher by police."
+		},
+		{
+			"group": "C",
+			"groupLabel": "Hard: crowds and news photos",
+			"title": "Squad car set afire in disorder / photo by Mel Larsen, Chicago Sun-Times.",
+			"date": "1966-01-01",
+			"itemUrl": "https://www.loc.gov/item/2005677034/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/cph/3c30000/3c35000/3c35600/3c35691_150px.jpg",
+			"lowResolution": true,
+			"description": "A low resolution thumbnail image showing a vehicle on fire in a street. The catalog title is Squad car set afire in disorder photo by Mel Larsen, Chicago Sun-Times. In the center a car is engulfed in flame and dark smoke. A street light pole is in the foreground. A crowd and buildings are faintly visible in the background on the left. Detail is limited by the small image size.",
+			"estimatedPeriod": "1966 per catalog date",
+			"notableDetails": [
+				"low resolution thumbnail limits detail",
+				"car burning with thick black smoke",
+				"street scene with pole in foreground",
+				"faint crowd visible in background"
+			],
+			"reference": "Photograph shows a police cruiser on its side in flames next to another damaged cruiser, as crowd gathers in the street to watch, following violence after police attempted to break up a gang fight in northwest Chicago."
+		},
+		{
+			"group": "D",
+			"groupLabel": "Hard: bird's-eye views, prints and maps",
+			"title": "Bird's-eye view of Philadelphia / drawn and engraved expressly for Harper's Weekly from sketches by Theodore R. Davis.",
+			"date": "1872-01-01",
+			"itemUrl": "https://www.loc.gov/item/2012645607/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/pga/00200/00225v.jpg",
+			"lowResolution": false,
+			"description": "Photo 1 is a black-and-white bird's-eye view engraving of Philadelphia. Text at the top reads SUPPLEMENT TO HARPER'S WEEKLY, June 15, 1872. Text at the bottom center reads BIRD'S-EYE VIEW OF PHILADELPHIA. Text at the bottom left reads Drawn and Engraved Expressly for Harper's Weekly. Text at the bottom right reads From Sketches by Theodore R. Davis. The view looks north over a dense grid of city blocks extending to the horizon. At the bottom foreground is a wide river with many sailing ships, steamboats, and small boats. A bridge with stone arches crosses the river on the lower left. The city is filled with rows of low buildings, with taller church steeples and larger structures scattered throughout. Two small islands with trees are in the river. In the far background a second river curves across the top of the image with open fields beyond.",
+			"estimatedPeriod": "1872, which matches the catalog date and the printed date of June 15, 1872 visible at the top of the image.",
+			"notableDetails": [
+				"The title BIRD'S-EYE VIEW OF PHILADELPHIA is printed at the bottom center.",
+				"The river in the foreground is the Delaware River with numerous ships and boats.",
+				"The image is marked as a supplement to Harper's Weekly.",
+				"The city is shown as a dense, regular street grid viewed from above."
+			],
+			"reference": "Print shows a bird's-eye view of Philadelphia, Pennsylvania, with the Delaware River, Windmill Island, and Smith Island in the foreground, and the Schuylkill River in the background; streets and prominent features identified on print."
+		},
+		{
+			"group": "D",
+			"groupLabel": "Hard: bird's-eye views, prints and maps",
+			"title": "View of the ruins of the city of Pittsburgh from Boyd's Hill / painted by W.C. Wall ; on stone by James Queen ; lith. of Wagner & McGuigan, No. 100, Chesnut Street, Philada.",
+			"date": "1850-01-01",
+			"itemUrl": "https://www.loc.gov/item/2014648393/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/pga/12200/12284v.jpg",
+			"lowResolution": false,
+			"description": "Photo 2 is a lithograph showing a city in ruins after a fire. Text at the bottom reads VIEW of the RUINS of the CITY of PITTSBURGH from BOYD'S HILL. Smaller text at the bottom left reads Painted by W.C. Wall. Smaller text at the bottom right reads On stone by James Queen. Smaller text at the bottom center reads Lith. of Wagner & McGuigan, No. 100, Chesnut Street, Philada. The viewpoint is from a high hill looking down a long straight street lined on both sides by burnt-out buildings, with only walls and chimneys standing. In the foreground a paved road with a stone retaining wall and lampposts curves down the hill, where a few small figures of people are walking. In the middle distance a church steeple remains standing intact. Beyond the ruins a river is visible on the left, and tree-covered hills are in the background under a cloudy sky.",
+			"estimatedPeriod": "1850 per the catalog date, which is consistent with the lithographic style and clothing of the figures.",
+			"notableDetails": [
+				"The printed title VIEW of the RUINS of the CITY of PITTSBURGH from BOYD'S HILL is visible at the bottom.",
+				"Most buildings are destroyed, showing only roofless walls and chimneys.",
+				"A single church steeple stands undamaged in the center.",
+				"Several small human figures are scattered on the streets and on the hill road in the foreground."
+			],
+			"reference": "Print shows a bird's-eye view of the ruins of the city of Pittsburgh, Pennsylvania after the fire of April 10, 1845."
+		},
+		{
+			"group": "D",
+			"groupLabel": "Hard: bird's-eye views, prints and maps",
+			"title": "Diamond Street",
+			"date": "1930",
+			"itemUrl": "https://www.loc.gov/item/2025170183/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/ppmscd/04000/04089_150px.jpg",
+			"lowResolution": true,
+			"description": "Photo 3 is labeled Diamond Street. Detail is limited by the image size. This is a very small, low-resolution, black-and-white overhead view looking down a city street. Text at the top that might be Diamond Street is suggested by the catalog title but is not clearly legible in the thumbnail. The image shows a street with rows of small dark shapes that appear to be cars parked along the sides, and dark shadows cast by tall buildings on the left side. Building facades line both sides of the street.",
+			"estimatedPeriod": "1930 per the catalog date; no visual evidence in the low-resolution thumbnail contradicts it.",
+			"notableDetails": [
+				"Image is marked LOW RESOLUTION and is a small thumbnail, so fine detail is not visible.",
+				"The view is a steep overhead or bird's-eye view of a street with many vehicles.",
+				"Strong shadows from buildings are visible on the street."
+			],
+			"reference": "Photograph shows a bird's-eye view of automobiles traveling along a street in Pittsburgh, possibly Forbes Avenue as seen from the Allegheny County Courthouse."
+		},
+		{
+			"group": "D",
+			"groupLabel": "Hard: bird's-eye views, prints and maps",
+			"title": "[Chestnut Street, eastward from 6th Street]",
+			"date": "1861-01-01",
+			"itemUrl": "https://www.loc.gov/item/2015651594/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/ppmsca/39900/39966r.jpg",
+			"lowResolution": false,
+			"description": "Photo 4 is a black-and-white photograph of a commercial street lined with brick buildings. The catalog title is Chestnut Street, eastward from 6th Street. The view looks down a street of three and four story brick buildings with many windows. On the building at the left foreground, signs read ELECTROTYPE FOUNDRY. and a smaller sign below reads ENGRAVERS ON WOOD. Other small signs for businesses are visible on other buildings but their text is less clear. Canvas awnings extend over the sidewalk on the right side of the street. The street and sidewalk appear empty of people and vehicles and the trees are bare. The image has faded edges and a sepia tone.",
+			"estimatedPeriod": "1861 per the catalog date, which is consistent with the architecture, signage style, and photographic process.",
+			"notableDetails": [
+				"A large sign on the corner building reads ELECTROTYPE FOUNDRY.",
+				"The buildings are multi-story brick commercial structures with awnings over the sidewalk.",
+				"The street is viewed from an elevated position looking eastward.",
+				"No people or horse-drawn vehicles are clearly visible in the street."
+			],
+			"reference": "Photograph shows a bird's-eye view, looking east, of Chestnut Street in Philadelphia, Pennsylvania; with a \"[St]ereotype Foundry\"  and \"Gilbert & Gihon Engravers on wood\" in a tall building at the corner, also \"Law Books\" and \"Eagle Hotel\", as well as many businesses along the street with awnings over the sidewalk."
+		},
+		{
+			"group": "D",
+			"groupLabel": "Hard: bird's-eye views, prints and maps",
+			"title": "Topographic view of the city of Reading Pa. 1881 / compiled from sketches by J. Hanold Kendall, and dedicated to its growing industries.",
+			"date": "1881-01-01",
+			"itemUrl": "https://www.loc.gov/item/2012648893/",
+			"imageUrl": "https://tile.loc.gov/storage-services/service/pnp/pga/02800/02882v.jpg",
+			"lowResolution": false,
+			"description": "Photo 5 is a illustrated topographic view of a city surrounded by inset images of buildings. Large text near the center top reads TOPOGRAPHIC VIEW OF THE CITY OF and large text near the center bottom reads READING PA. 1881. Smaller text at the top border reads SITUATED IN THE MIDST OF A RICH MINERAL & AGRICULTURAL DISTRICT AND BECOME A LARGE MANUFACTURING CENTRE and at the far top left POPULATION and at the far top right 45,000. The central image is a bird's-eye view of a city in a river valley with dense blocks of buildings, many factory chimneys with smoke, and two bridges crossing a river in the foreground. Hills are visible in the background. Around the border are about twenty smaller inset illustrations of individual factories, churches, stores, and other buildings, each with small labels. Trees in the center foreground are near the river. The overall image is a black-and-white engraving with aged paper tones.",
+			"estimatedPeriod": "1881, which matches the catalog date and the date READING PA. 1881 printed in the image.",
+			"notableDetails": [
+				"The main title READING PA. 1881 is printed across the center above the river.",
+				"The population is listed as 45,000 at the top right.",
+				"The central panorama shows factories with smoking chimneys and two river bridges.",
+				"The border contains many inset views of specific businesses and public buildings."
+			],
+			"reference": "Print shows a bird's-eye view of the city of Reading, Pennsylvania, with the Schuylkill River in the foreground, spanned by a railroad bridge and a covered bridge; surrounded by vignettes depicting many of the major businesses in Reading, such as the Philadelphia & Reading Railroad Depot, A. Wilhelm & Co., manufacturers of white lead, zinc and fine colors, car, bridge & depot paints, Samuel Buch, distiller of pure wheat, rye & malt whiskey, factory, corner of 11th and Muhlenberg Sts., office, 527 Penn St., Sohl, Seidel & Co., manufacturers of furniture, Reading Stove Works, J.H. Sternberg, Reading Bolt & Nut Works, manufacturer of bolts, nuts, washers, rivets, refined Iron, etc., J.L. Stichter & Son, hardward, iron and steel mfg., Kline & Eppihimer, dry goods & carpets, and others."
+		}
+	]
+}

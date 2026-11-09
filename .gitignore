@@ -16,3 +16,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Eval: cached LoC item records
+eval/cache/

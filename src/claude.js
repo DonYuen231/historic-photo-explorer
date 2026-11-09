@@ -37,8 +37,9 @@ function buildRequest(photos, subject, location) {
 	const content = [];
 
 	photos.forEach((photo, i) => {
-		const dated = photo.date ? ` (catalog date: ${photo.date.slice(0, 4)})` : "";
-		content.push({ type: "text", text: `Photo ${i + 1}: "${photo.title}"${dated}` });
+		const dated = photo.date ? ` (catalog date: ${photo.date.slice(0, 4)})` : " (no catalog date)";
+		const lowRes = photo.lowResolution ? " [LOW RESOLUTION: small thumbnail, fine detail is not visible]" : "";
+		content.push({ type: "text", text: `Photo ${i + 1}: "${photo.title}"${dated}${lowRes}` });
 		content.push({
 			type: "image",
 			source: { type: "base64", media_type: photo.mediaType, data: photo.base64 },
@@ -50,9 +51,20 @@ function buildRequest(photos, subject, location) {
 		text:
 			`These are historical images from the Library of Congress, found by searching for ` +
 			`"${subject}" in "${location}". For each photo, write a description for a visually ` +
-			`impaired reader: what is depicted, the setting, and the people, structures or objects ` +
-			`in view. Estimate the time period and list a few notable details. Use plain text only, ` +
-			`no Markdown. Return one entry per photo, numbered to match.`,
+			`impaired reader, following these rules:\n` +
+			`1. Open with the main subject in one plain sentence. If a title, caption, sign or other ` +
+			`text is written on the image, read it out in the description itself, near the start.\n` +
+			`2. Then describe the setting and the people, structures or objects in view, most important first.\n` +
+			`3. Only state what you can see. Name a person, place or historical event only if the ` +
+			`catalog title or text visible in the image supports it. Do not link the photo to a ` +
+			`specific event that neither of those mentions.\n` +
+			`4. For the estimated period, use the catalog date when one is given. Disagree with it only ` +
+			`if something visible clearly contradicts it, and say what that is. With no catalog date ` +
+			`and no clear evidence, give a broad range and say it is uncertain.\n` +
+			`5. For a photo marked LOW RESOLUTION, keep the description short, describe only what is ` +
+			`clearly visible, and say that detail is limited by the image size.\n` +
+			`Use plain text only, no Markdown. Return one entry per photo, numbered to match. ` +
+			`Also list a few notable details for each photo.`,
 	});
 
 	return {
@@ -125,6 +137,7 @@ function describePhotos(photos, subject, location, callback) {
 				date: photo.date,
 				itemUrl: photo.itemUrl,
 				imageUrl: photo.imageUrl,
+				lowResolution: Boolean(photo.lowResolution),
 				description: match.description || "No description was returned for this photo.",
 				estimatedPeriod: match.estimated_period || "",
 				notableDetails: Array.isArray(match.notable_details) ? match.notable_details : [],

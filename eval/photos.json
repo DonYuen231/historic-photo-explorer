@@ -1,0 +1,33 @@
+{
+	"note": "20 Library of Congress items in 4 groups of 5. Each group is sent to Claude as one batch, the same way the app does it. Every item has a cataloger-written summary ('Photograph shows...'), used as the human reference. The summary is NOT sent to Claude.",
+	"groups": [
+		{
+			"id": "A",
+			"label": "Easy: portraits",
+			"subject": "portrait",
+			"location": "New York",
+			"items": ["2018645051", "2020636732", "2020636554", "2024634253", "2020636055"]
+		},
+		{
+			"id": "B",
+			"label": "Medium: signs and text in the photo",
+			"subject": "sign",
+			"location": "New York",
+			"items": ["2018645238", "2020635650", "2014648680", "2018645241", "2005694368"]
+		},
+		{
+			"id": "C",
+			"label": "Hard: crowds and news photos",
+			"subject": "crowd",
+			"location": "Chicago",
+			"items": ["2012645726", "2011660937", "2012646768", "95510888", "2005677034"]
+		},
+		{
+			"id": "D",
+			"label": "Hard: bird's-eye views, prints and maps",
+			"subject": "bird's eye view",
+			"location": "Pennsylvania",
+			"items": ["2012645607", "2014648393", "2025170183", "2015651594", "2012648893"]
+		}
+	]
+}

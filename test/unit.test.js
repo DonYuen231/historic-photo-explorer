@@ -84,3 +84,71 @@ test("TtlCache expires entries and evicts the oldest", () => {
 	time = 150;
 	assert.equal(cache.get("c"), undefined);
 });
+
+const { pickImageUrl, extractSummary } = require("../eval/run");
+const { parseCsvLine } = require("../eval/summarize");
+
+test("eval pickImageUrl chooses the image closest to 640px tall", () => {
+	const urls = [
+		"https://tile.loc.gov/a_150px.jpg#h=150&w=100",
+		"https://tile.loc.gov/ar.jpg#h=640&w=427",
+		"https://tile.loc.gov/av.jpg#h=1024&w=683",
+	];
+	assert.equal(pickImageUrl(urls), "https://tile.loc.gov/ar.jpg");
+	assert.equal(pickImageUrl(["https://tile.loc.gov/a_150px.jpg#h=150&w=122"]), "https://tile.loc.gov/a_150px.jpg");
+	assert.equal(pickImageUrl([]), "");
+});
+
+test("eval extractSummary handles string and array summaries", () => {
+	assert.equal(extractSummary({ summary: " Photograph shows a sign. " }), "Photograph shows a sign.");
+	assert.equal(extractSummary({ summary: ["Part one.", "Part two."] }), "Part one. Part two.");
+	assert.equal(extractSummary({}), "");
+});
+
+test("eval parseCsvLine keeps commas inside quoted fields", () => {
+	assert.deepEqual(parseCsvLine('1,A,"Says ""hi"", then leaves",5'), ["1", "A", 'Says "hi", then leaves', "5"]);
+});
+
+const { imageSize } = require("../src/image-size");
+const { isLowResolution } = require("../src/loc");
+const { buildRequest } = require("../src/claude");
+
+test("imageSize reads PNG, GIF and JPEG dimensions", () => {
+	const png = Buffer.alloc(24);
+	png.writeUInt32BE(0x89504e47, 0);
+	png.writeUInt32BE(640, 16);
+	png.writeUInt32BE(480, 20);
+	assert.deepEqual(imageSize(png), { width: 640, height: 480 });
+
+	const gif = Buffer.alloc(24);
+	gif.write("GIF89a", 0, "ascii");
+	gif.writeUInt16LE(150, 6);
+	gif.writeUInt16LE(122, 8);
+	assert.deepEqual(imageSize(gif), { width: 150, height: 122 });
+
+	// SOI, then an APP0 segment (length 4), then SOF0 with height 150 and width 121.
+	const jpeg = Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0x00, 0x04, 0x00, 0x00, 0xff, 0xc0, 0x00, 0x11, 0x08, 0x00, 0x96, 0x00, 0x79, 0x03, 0, 0, 0, 0, 0, 0]);
+	assert.deepEqual(imageSize(jpeg), { width: 121, height: 150 });
+
+	assert.equal(imageSize(Buffer.from("not an image at all, just text")), null);
+});
+
+test("isLowResolution flags thumbnails only", () => {
+	assert.equal(isLowResolution({ width: 150, height: 122 }), true);
+	assert.equal(isLowResolution({ width: 427, height: 640 }), false);
+	assert.equal(isLowResolution(null), false);
+});
+
+test("buildRequest marks low-resolution photos in the prompt", () => {
+	const photo = { title: "T", date: "1930", mediaType: "image/jpeg", base64: "" };
+	const request = buildRequest([photo, { ...photo, lowResolution: true }], "s", "l");
+	const labels = request.messages[0].content.filter((c) => c.type === "text").map((c) => c.text);
+	assert.ok(!labels[0].includes("LOW RESOLUTION"));
+	assert.ok(labels[1].includes("LOW RESOLUTION"));
+});
+
+test("renderResults shows a notice for low-resolution photos", () => {
+	const photo = { title: "T", imageUrl: "https://x/y.jpg", description: "d", estimatedPeriod: "", notableDetails: [] };
+	assert.ok(renderResults("s", "l", [{ ...photo, lowResolution: true }]).includes("Low-resolution image"));
+	assert.ok(!renderResults("s", "l", [photo]).includes("Low-resolution image"));
+});

@@ -82,6 +82,7 @@ Settings are read from environment variables or a `.env` file:
 │   ├── cache.js        # In-memory cache with expiry
 │   └── views.js        # HTML rendering with escaping
 ├── public/             # Static search page and stylesheet
+├── eval/               # Description quality evaluation (see "Evaluation"; start with eval/REVIEW.md)
 └── test/               # Unit tests (node:test)
 ```
 
@@ -93,9 +94,115 @@ npm test
 
 Runs the unit tests with Node's built-in test runner. They don't make network calls.
 
+## Evaluation
+
+The full write-up, covering the design choices, the rubric, both rounds and the model judges, is in [docs/WRITEUP.md](docs/WRITEUP.md).
+
+Unit tests check the code. They can't tell me whether the descriptions are any good, so I scored them against a rubric, changed the app based on what I found, and scored again.
+
+### Method
+
+I picked 20 Library of Congress photos as 4 searches of 5: portraits (easy), signs with text (medium), crowds and news photos (hard), and bird's-eye prints and maps (hard). `node eval/run.js <version>` sends each group through the app's own download and Claude steps (same prompt, same model, same 5-photo batches). Every photo was chosen because a LoC cataloger had written a summary of what it shows ("Photograph shows…"). That summary is never sent to Claude, so it works as a human-written reference. Each description is scored 1 to 5 on:
+
+- **Accuracy:** is everything it says actually in the photo or the catalog record? A hedged guess that names an event the record contradicts still counts as an error.
+- **Completeness:** does it leave out anything important that's in the picture, such as a person, an animal, the main object or a sign? A small thumbnail doesn't excuse a miss, because the listener misses it either way.
+- **Usefulness to a blind reader:** how it's told, not what's in it. Read aloud once, can a listener follow it? Main subject first, visible text read out early, no filler, not too long.
+- **Matches reference:** how much of the cataloger's summary does it also convey? Wrong reference facts are ignored (in photo 3 the cataloger wrote "purse", but it's a wicker basket, and the model got it right).
+
+Every level from 1 to 5 is defined in **[eval/RUBRIC.md](eval/RUBRIC.md)**, with an example from this eval for each. An earlier three-score version of the rubric, and the scores made with it, are kept in [eval/archive/three-score-rubric/](eval/archive/three-score-rubric/).
+
+Claude drafted the scores. Four other models graded the same descriptions independently (see [Model judges](#model-judges)), and a person checked the scores against the images, starting with every score where the models and the draft differed by 2 or more points. These 40 checked scores are the baseline the model judges are measured against. Model: `claude-opus-5-5`, November 2026.
+
+**To review the scores, open [eval/REVIEW.md](eval/REVIEW.md).** For each photo it has the image, the cataloger's summary, both descriptions, the baseline scores with notes, the judges' scores and reasons, and the other models' descriptions. The disputed scores are listed at the top. Rebuild it with `node eval/report.js` after editing [scores-v1.csv](eval/scores-v1.csv) or [scores-v2.csv](eval/scores-v2.csv).
+
+### Round 1 (v1): what I found
+
+1. **Image size mattered more than how hard the photo was.** For 5 of the 20 photos, LoC only offers a 150-pixel thumbnail, and the app sent it anyway. Those 5 averaged 3.4 for accuracy, against 4.8 for the rest, and they included every serious mistake. On photo 14 the model said a stretcher carried "presumably the victim"; the record says it was the gang's lawyer. The model said the image was too small in only 2 of the 5 cases.
+2. **It filled gaps with plausible history.** It linked a 1966 burning squad car to "the July 1966 West Side unrest", but the record says it was a gang fight on the northwest side. On two photos it replaced the catalog date with its own guess, without any visible evidence.
+3. **It read text in images very well, but didn't always put it first.** All four signs were transcribed correctly, down to an artist's signature and a tiny sticker. On the dense prints, though, the title and banner text only appeared at the end of the "notable details" list.
+
+### Changes (v2)
+
+- **Low-resolution check** ([src/image-size.js](src/image-size.js), [src/loc.js](src/loc.js)): the app reads each image's width and height from its bytes. If the longest side is under 400px, the photo is marked low resolution. Claude is told so in the prompt, and the results page shows a notice next to the photo.
+- **Stricter prompt** ([src/claude.js](src/claude.js)): it now says to start with the main subject and any text written on the image; to name people, places or events only when the catalog title or visible text supports it; to use the catalog date unless something visible clearly contradicts it; and, for low-resolution photos, to describe less and say why.
+
+### Round 2 (v2): results
+
+Same 20 photos, same model, same scoring. Each cell is v1 → v2.
+
+<details>
+<summary>Scores for all 20 photos</summary>
+
+| # | Group | Photo | Accuracy (v1 → v2) | Completeness (v1 → v2) | Usefulness (v1 → v2) | Matches reference (v1 → v2) |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | A | Harriet Tubman standing portrait | 4 → 5 | 5 → 5 | 4 → 4 | 5 → 5 |
+| 2 | A | Woman with pearls and gloves | 5 → 5 | 5 → 5 | 4 → 4 | 5 → 5 |
+| 3 | A | Woman holding a newspaper | 5 → 5 | 5 → 5 | 4 → 4 | 5 → 5 |
+| 4 | A | Family portrait NYC *(150px)* | 4 → 4 | 2 → 2 | 4 → 4 | 3 → 3 |
+| 5 | A | Two men on the sidewalk | 5 → 5 | 5 → 5 | 4 → 4 | 5 → 5 |
+| 6 | B | Bloom Jeweler neon clock sign | 5 → 5 | 4 → 4 | 5 → 5 | 4 → 4 |
+| 7 | B | Castle Clinton sign | 5 → 5 | 5 → 5 | 5 → 5 | 5 → 5 |
+| 8 | B | Rancho Luna social club mural | 5 → 5 | 5 → 5 | 5 → 5 | 5 → 5 |
+| 9 | B | Cuchifrito No. 1 Bar B.Q. sign | 5 → 5 | 5 → 5 | 5 → 5 | 5 → 5 |
+| 10 | B | Muhammad Ali signing autographs *(150px)* | 5 → 5 | 4 → 3 | 4 → 4 | 2 → 2 |
+| 11 | C | Communist parade in Chicago | 4 → 5 | 5 → 5 | 4 → 4 | 4 → 4 |
+| 12 | C | Oak Street Beach crowd | 5 → 5 | 5 → 5 | 5 → 4 | 5 → 4 |
+| 13 | C | American Derby 1904 panorama | 5 → 5 | 5 → 5 | 4 → 5 | 5 → 5 |
+| 14 | C | Paddy Murray shooting (two photos) *(150px)* | 2 → 5 | 2 → 2 | 4 → 4 | 1 → 2 |
+| 15 | C | Squad car set afire 1966 *(150px)* | 2 → 4 | 3 → 3 | 5 → 4 | 3 → 3 |
+| 16 | D | Bird's-eye view of Philadelphia 1872 | 5 → 5 | 5 → 5 | 4 → 5 | 4 → 4 |
+| 17 | D | Ruins of Pittsburgh after the 1845 fire | 5 → 5 | 5 → 5 | 5 → 5 | 5 → 4 |
+| 18 | D | Diamond Street from above *(150px)* | 4 → 5 | 5 → 5 | 4 → 4 | 4 → 4 |
+| 19 | D | Chestnut Street Philadelphia | 4 → 5 | 4 → 4 | 4 → 4 | 4 → 4 |
+| 20 | D | Topographic view of Reading 1881 | 5 → 5 | 4 → 4 | 3 → 4 | 4 → 4 |
+
+Notes on each score are in [eval/scores-v1.csv](eval/scores-v1.csv) and [eval/scores-v2.csv](eval/scores-v2.csv). Regenerate these tables with `node eval/summarize.js v1 v2`.
+</details>
+
+| Subset | Photos | Accuracy (v1 → v2) | Completeness (v1 → v2) | Usefulness (v1 → v2) | Matches reference (v1 → v2) |
+| --- | --- | --- | --- | --- | --- |
+| **All** | 20 | 4.45 → 4.90 | 4.40 → 4.35 | 4.30 → 4.35 | 4.15 → 4.10 |
+| Easy (group A) | 5 | 4.60 → 4.80 | 4.40 → 4.40 | 4.00 → 4.00 | 4.60 → 4.60 |
+| Hard (groups C, D) | 10 | 4.10 → 4.90 | 4.30 → 4.30 | 4.20 → 4.30 | 3.90 → 3.80 |
+| Full-size image | 15 | 4.80 → 5.00 | 4.80 → 4.80 | 4.33 → 4.47 | 4.67 → 4.53 |
+| 150px thumbnail only | 5 | 3.40 → 4.60 | 3.20 → 3.00 | 4.20 → 4.00 | 2.60 → 2.80 |
+
+1. **Accuracy went up the most where it was worst.** On the 5 thumbnails it went from 3.4 to 4.6. All 5 were flagged correctly. The model stopped guessing (no more "the victim", no invented riot, no "late-1920s automobiles") and said what it couldn't see. One slip remains: both versions call a crashed car in the squad-car photo "parked". On full-size images every description scored 5 for accuracy.
+2. **Completeness and matching the reference didn't improve (4.40 → 4.35 and 4.15 → 4.10).** On the thumbnails, completeness stayed around 3. Being careful stops the model from making things up, but it can't make a 150px image show Muhammad Ali, a second police car or two dogs. That limit is in the source data, not the prompt.
+3. **The stricter prompt had costs.** It removed some correct context: the Pittsburgh print no longer says the ruins came from a fire, and the Bloom Jeweler sign lost its diamond-ring hint. It also added filler: many descriptions now start with "no text is visible on the image" or "identified by the catalog title", which a screen-reader user has to sit through.
+
+### Model judges
+
+Four models on NanoGPT (DeepSeek V4.1 Flash, Kimi K2.6, Gemma 4 31B and Muse Spark 1.3) each wrote their own descriptions of the 20 photos with the app's v2 prompt. Then each one graded all six sets (Claude v1, Claude v2 and the four models' own) without knowing who wrote them. A judge saw the photo, the catalog record, the reference summary and the rubric without its examples. A model's grades of its own descriptions are left out of the ranking.
+
+`node eval/judge.js` runs both steps and can be resumed if interrupted. `node eval/compare.js` writes the results to [eval/judges/summary.md](eval/judges/summary.md).
+
+| Descriptions by | Accuracy | Completeness | Usefulness | Matches reference | Overall |
+| --- | --- | --- | --- | --- | --- |
+| **Claude v1** | 4.59 | 4.19 | 4.41 | 4.00 | **4.30** |
+| **Claude v2** | 4.75 | 4.11 | 4.42 | 3.80 | **4.27** |
+| DeepSeek V4.1 Flash | 4.83 | 3.77 | 4.60 | 3.38 | 4.15 |
+| Muse Spark 1.3 | 4.37 | 4.07 | 4.35 | 3.77 | 4.14 |
+| Kimi K2.6 | 4.47 | 3.78 | 4.72 | 3.57 | 4.13 |
+| Gemma 4 31B | 4.45 | 3.30 | 4.62 | 3.50 | 3.97 |
+
+1. **Claude ranks first with every judge, but its lead is clear only over Kimi and Gemma.** Against DeepSeek and Muse Spark the 95% intervals reach zero or nearly do. Its edge is mostly Completeness, and its descriptions are also the longest. DeepSeek is the most accurate and Kimi the easiest to listen to.
+2. **The judges agree moderately with the baseline.** The median of the four matches the baseline exactly on 66% of scores, with a rank correlation of 0.70 and no overall bias. Kimi is the strictest judge, about 0.4 below the baseline on average.
+3. **Self-preference is small.** Gemma scores its own descriptions 0.38 higher than the other judges do, but it is generous in general (+0.26). After allowing for that, no judge favors its own work by more than about 0.1.
+4. **Judges miss errors in the "notable details" list.** On the squad car (v1), only one of four judges marked down the wrong event guess at the end of that list.
+
+The full write-up, with intervals, per-judge statistics and two photos examined closely, is in [docs/WRITEUP.md](docs/WRITEUP.md).
+
+### What I'd change next
+
+- **Only mention text when there is some.** Add "If there's no text on the image, don't say so" to the prompt, to remove the filler.
+- **Allow well-known context from the title.** Let the model explain an event the title clearly refers to (a print titled "ruins of Pittsburgh" can mention the 1845 fire), while still not linking a photo to an event the title doesn't mention.
+- **Make further checking fully model-based.** A person can't check every score past a few dozen photos, so new photos will be scored by the judge panel alone. The 40 checked scores become a calibration set: when the prompt, rubric or judge models change, re-run the panel on that set, and trust it only while its median stays within 1 point of the baseline. The judges' prompt should also tell them to check the notable-details list.
+- **Test identification more directly.** Add photos where the main subject is a person the reference names.
+
 ## Error handling
 
-- Missing or overly long input returns **400** with a friendly message. Unknown routes return **404**.
+- Missing or overly long input returns **400** with a message saying what's wrong. Unknown routes return **404**.
 - Every outbound request has a timeout. Redirects are followed, with a limit.
 - If an image fails to download it is skipped, and the remaining photos are still described.
 - If an upstream API fails, the user sees a **502** page. The details are logged on the server.

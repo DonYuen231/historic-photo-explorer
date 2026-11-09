@@ -80,6 +80,14 @@ button:focus-visible {
 	font-size: 0.9rem;
 }
 
+.notice {
+	padding: 8px 12px;
+	color: #6a4a00;
+	background: #fff8e1;
+	border-left: 4px solid #d4a017;
+	font-size: 0.9rem;
+}
+
 .photo {
 	margin: 24px 0;
 	padding: 20px;

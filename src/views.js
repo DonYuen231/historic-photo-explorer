@@ -48,9 +48,14 @@ function renderPhoto(photo, index) {
 		? `<p class="source"><a href="${escapeHtml(photo.itemUrl)}">View on loc.gov</a></p>`
 		: "";
 
+	const lowRes = photo.lowResolution
+		? `<p class="notice">Low-resolution image: the Library of Congress only offers a small thumbnail, so this description has limited detail.</p>`
+		: "";
+
 	return `			<article class="photo">
 				<h2>Photo ${index + 1}: ${escapeHtml(photo.title)}</h2>
 				<img src="${escapeHtml(photo.imageUrl)}" alt="${escapeHtml(photo.title)} (described below)" loading="lazy" />
+				${lowRes}
 				${period}
 				<p>${escapeHtml(photo.description)}</p>
 				${details}
