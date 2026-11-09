@@ -7,6 +7,7 @@
  */
 
 const fs = require("node:fs");
+const KEYS = ["accuracy", "completeness", "usefulness", "reference"];
 const path = require("node:path");
 
 /** Parses one CSV line, allowing double-quoted fields that contain commas. */
@@ -37,7 +38,7 @@ function readScores(file) {
 	const keys = parseCsvLine(header);
 	return lines.map((line) => {
 		const row = Object.fromEntries(parseCsvLine(line).map((v, i) => [keys[i], v]));
-		for (const k of ["accuracy", "usefulness", "reference"]) row[k] = Number(row[k]);
+		for (const k of KEYS) row[k] = Number(row[k]);
 		return row;
 	});
 }
@@ -53,7 +54,7 @@ const SUBSETS = [
 	["Full-size image", (r) => r.thumbnail !== "yes"],
 	["150px thumbnail only", (r) => r.thumbnail === "yes"],
 ];
-const KEYS = ["accuracy", "usefulness", "reference"];
+
 
 /**
  * Builds the README tables for one or more scored versions.
@@ -66,16 +67,16 @@ function summarize(versions) {
 	const header = names.length > 1 ? ` (${names.join(" → ")})` : "";
 
 	const out = [
-		`| # | Group | Photo | Accuracy${header} | Usefulness${header} | Matches reference${header} |`,
-		"| --- | --- | --- | --- | --- | --- |",
+		`| # | Group | Photo | Accuracy${header} | Completeness${header} | Usefulness${header} | Matches reference${header} |`,
+		"| --- | --- | --- | --- | --- | --- | --- |",
 		...first.map((r, i) => {
 			const title = r.thumbnail === "yes" ? `${r.title} *(150px)*` : r.title;
 			const scores = KEYS.map((k) => cell((rows) => rows[i][k]));
 			return `| ${r.photo} | ${r.group} | ${title} | ${scores.join(" | ")} |`;
 		}),
 		"",
-		`| Subset | Photos | Accuracy${header} | Usefulness${header} | Matches reference${header} |`,
-		"| --- | --- | --- | --- | --- |",
+		`| Subset | Photos | Accuracy${header} | Completeness${header} | Usefulness${header} | Matches reference${header} |`,
+		"| --- | --- | --- | --- | --- | --- |",
 	];
 	for (const [label, keep] of SUBSETS) {
 		const count = first.filter(keep).length;

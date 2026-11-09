@@ -18,9 +18,9 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Long row of buttons down the front of the dark bodice; White collar or scarf at the neck; Hands resting on the back of a fringed armchair with a hanging tassel; Hat and dark cloth draped on the chair; Draped side table with a book on the left; Studio backdrop with a column at the right
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 2. [A] [Half-length portrait of a woman looking contemplative]
 
@@ -36,9 +36,9 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Multi-strand pearl necklace; White gloves held in her hands; Curled, upswept hairstyle; Wristwatch, bracelet and chain bag handle; Parked cars and trees blurred in the background
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 3. [A] [Woman holding a newspaper, three-quarter length portrait]
 
@@ -54,9 +54,9 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Folded newspaper tucked under her arm, text not legible; Wicker basket with white contents; Sleeveless dress with cutout V-neckline; Small cross pendant necklace and large earring; Passersby in the dim background
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 4. [A] Family portrait - NYC
 
@@ -72,9 +72,9 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Group of adults and children arranged around a sofa; Children seated on the floor in front; Fireplace mantel at the right; Image is a small thumbnail, so fine detail is not visible
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 5. [A] [Two men, three-quarter length portrait, standing]
 
@@ -90,9 +90,9 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Flat cap and cigarette on the man at left; Fedora and heavy overcoat on the man at right; Plaid shirt under a tweed jacket; Smoke or steam visible in the air; Building doorway and sidewalk behind them
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 6. [B] Neon sign, Westchester Ave., Bronx, Oct. 1970
 
@@ -108,9 +108,9 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Sign text reads BLOOM JEWELER; A working-style clock with white hands is set in the center; Paint is peeling and the neon letter channels are rusted; Loose wires dangle across the upper letters; Eight-sided lamp housing with dark glass mounted on top
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 7. [B] Sign at entrance of Castle Clinton
 
@@ -126,9 +126,9 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Sign names Castle Clinton National Monument and the National Park Service; Text mentions the War of 1812, Castle Garden, the emigrant landing depot and the New York City Aquarium; States that restoration began in October 1950; Sign is fixed to temporary wooden boarding in front of stone walls; Photo is mounted on a white card with faint handwritten markings
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 8. [B] Social club sign, South Bronx, 1970
 
@@ -144,9 +144,9 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Sign text reads RANCHO LUNA and SOCIAL CLUB; Painted scene of a cabin with red-lit windows by the water; A sailboat and a pale round moon or sun over hills; Bold red lettering with black drop shadows; Carved dark woodwork and stone at the right edge of the building
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 9. [B] South Bronx sign by Polaco, New York City, 1970
 
@@ -162,9 +162,9 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Sign text reads Cuchifrito No 1 and BAR B.Q; Painter's signature Polaco in the lower right corner; Tropical scene with palm trees, water and a small house; Cluster of spotlights mounted in front of the sign; Yellow RONMAR sticker on the awning below
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 10. [B] The champ signs
 
@@ -180,9 +180,9 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Low-resolution thumbnail; fine detail is not visible; Central figure appears to be signing autographs; Crowded scene with many people in hats and coats; The word CHAMP is partly visible on a sign in the background
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 11. [C] Communists' parade gets O.K. police guard in Chicago
 
@@ -198,9 +198,9 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Bird's-eye view from a high vantage point; Almost every marcher wears a hat; Car with headlights lit at the right edge of the crowd; Building with metal framework along the left side; Pale street surface, possibly snow-covered
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 12. [C] All Chicago turns to the beach as mercury rises
 
@@ -216,9 +216,9 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Hundreds of beachgoers filling the sand; One-piece swimsuits typical of the era; Man in a lettered swimsuit top walking in the foreground; Woman in a flowered dress at the right edge; Row of high-rise buildings, with one tall tower, behind the beach
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 13. [C] The great American derby. Chicago, June 18, 1904
 
@@ -234,9 +234,9 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Handwritten caption: The Great American Derby, Chicago, June 18, 1904; Large grandstand topped with flags; Spectators in wide hats and long light dresses along the rail; White tent in the infield on the right; Panorama assembled from joined sections, with visible seams
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 14. [C] Machine gun pumps a period into career of Paddy Murray, gang leader ...
 
@@ -252,9 +252,9 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Composite layout with a circular inset photo; Crowd of people in hats in the main image; Men carrying what appears to be a stretcher in the inset; Detail is limited by the small image size
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 15. [C] Squad car set afire in disorder / photo by Mel Larsen, Chicago Sun-Times.
 
@@ -270,9 +270,9 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Large plume of smoke and fire on the right side of the street; Elevated view down a wide city street; Light-colored car near the lower right; Detail is limited by the small image size
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 16. [D] Bird's-eye view of Philadelphia / drawn and engraved expressly for Harper's Weekly from sketches by Theodore R. Davis.
 
@@ -288,9 +288,9 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Printed header: Supplement to Harper's Weekly, June 15, 1872; Credits: drawn and engraved for Harper's Weekly, from sketches by Theodore R. Davis; Dense grid of city blocks with open squares and diagonal avenues; Foreground river full of sailing ships, steamboats and a wooded island; Row of large arched shed structures on the waterfront at lower left; Winding river and open countryside along the horizon; Fold lines, torn edges and a handwritten pencil number at lower left
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 17. [D] View of the ruins of the city of Pittsburgh from Boyd's Hill / painted by W.C. Wall ; on stone by James Queen ; lith. of Wagner & McGuigan, No. 100, Chesnut Street, Philada.
 
@@ -306,9 +306,9 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Title text names Pittsburgh and Boyd's Hill; Many standing chimneys and roofless brick walls; Long central street leading to a distant church steeple; Figures with lamp posts on a bridge in the foreground; River with boats at left and hills on the horizon; Credits to W.C. Wall, James Queen, and Wagner & McGuigan of Philadelphia
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 18. [D] Diamond Street
 
@@ -324,9 +324,9 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Steep overhead viewpoint looking down on the street; Row of dark shapes along the street, likely vehicles; Strong contrast between light and shadow; Print mounted in a wide white mat; Small image size limits visible detail
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 19. [D] [Chestnut Street, eastward from 6th Street]
 
@@ -342,9 +342,9 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Partly cut-off sign ending in "...ereotype Foundry"; Sign reading "Gilbert & Gihon, Engravers on Wood"; Row of brick commercial buildings of different heights; Cloth awnings over the sidewalk in front of the shops; Elevated viewpoint looking down the length of the street; Faded sepia tone typical of an early photograph
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
 
 ## 20. [D] Topographic view of the city of Reading Pa. 1881 / compiled from sketches by J. Hanold Kendall, and dedicated to its growing industries.
 
@@ -360,6 +360,6 @@ Score each photo 1 to 5 using the rubric in [RUBRIC.md](RUBRIC.md).
 
 **Notable details:** Banner title "Reading Pa. 1881" with a population figure of 45,000; Central river scene with a long diagonal bridge carrying a train; City skyline of church spires and factory smokestacks against hills; Border of vignettes advertising factories, shops and breweries; Caption for Reading Stove Works and for J. H. Sternbergh, an iron goods maker; Bottom slogan about rail links to New York, Philadelphia, and the Schuylkill and Lebanon Valleys
 
-| Accuracy | Usefulness | Reference match | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| Accuracy | Completeness | Usefulness | Reference match | Notes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |

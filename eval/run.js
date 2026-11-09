@@ -152,9 +152,9 @@ function writeReview(rows, version) {
 			"",
 			`**Notable details:** ${r.notableDetails.join("; ")}`,
 			"",
-			"| Accuracy | Usefulness | Reference match | Notes |",
-			"| --- | --- | --- | --- |",
-			"|  |  |  |  |",
+			"| Accuracy | Completeness | Usefulness | Reference match | Notes |",
+			"| --- | --- | --- | --- | --- |",
+			"|  |  |  |  |  |",
 			""
 		);
 	});
