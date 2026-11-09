@@ -19,11 +19,11 @@ Each cell: average gap from the baseline score in points (share within 1 point).
 
 | Judge | Accuracy | Completeness | Usefulness | Matches reference | Bias |
 | --- | --- | --- | --- | --- | --- |
-| gemma-4-31b | 0.35 (90%) | 0.25 (100%) | 0.33 (100%) | 0.28 (100%) | 0.13 |
-| deepseek-v4.1-flash | 0.35 (93%) | 0.57 (95%) | 0.35 (100%) | 0.23 (100%) | -0.07 |
-| muse-spark-1.3 | 0.28 (98%) | 0.30 (100%) | 0.42 (100%) | 0.33 (98%) | -0.02 |
+| gemma-4-31b | 0.35 (93%) | 0.25 (100%) | 0.33 (100%) | 0.28 (100%) | 0.13 |
+| deepseek-v4.1-flash | 0.30 (95%) | 0.57 (95%) | 0.35 (100%) | 0.23 (100%) | -0.07 |
+| muse-spark-1.3 | 0.28 (100%) | 0.30 (100%) | 0.42 (100%) | 0.33 (98%) | -0.02 |
 | kimi-k2.6 | 0.50 (88%) | 0.68 (90%) | 0.42 (98%) | 0.63 (85%) | -0.39 |
-| **judge panel (median)** | 0.31 (95%) | 0.34 (100%) | 0.35 (100%) | 0.19 (100%) | 0.00 |
+| **judge panel (median)** | 0.31 (98%) | 0.34 (100%) | 0.35 (100%) | 0.19 (100%) | 0.00 |
 
 ## 3. Do judges favor their own descriptions?
 
@@ -38,5 +38,4 @@ Each cell: average gap from the baseline score in points (share within 1 point).
 
 | Version | Photo | Score | Baseline | Panel median | Judges' reasons |
 | --- | --- | --- | --- | --- | --- |
-| claude-v1 | 4. Family portrait NYC | Accuracy | 3 | 5 | gemma-4-31b 5: Every claim made is visible in the image or supported by the catalog record.<br>deepseek-v4.1-flash 5: Every claim matches the photo or the catalog record: two men and children posed in a furnished room with a mantel, wall pictures, a doorway on the left, and a light object on the floor, and hedges are used appropriately.<br>muse-spark-1.3 5: All stated claims about a black-and-white family group seated in a living room in NYC around 1990 are visible or from the catalog, with uncertain details properly hedged and no false claim.<br>kimi-k2.6 4: The description correctly identifies the family and indoor setting, but it states 'sofa and armchairs' in the notable details when the image appears to show only a sofa, and 'several adults' is a slight overstatement for the two men visible. |
 | claude-v1 | 15. Squad car set afire 1966 | Accuracy | 2 | 5 | gemma-4-31b 5: All claims are supported by the image or the catalog record.<br>deepseek-v4.1-flash 5: Every claim — elevated view, burning squad car with smoke, light-colored car, crowds, buildings, pole arm — is visible in the photo or supported by the catalog, and the 1966 period matches the catalog date.<br>muse-spark-1.3 2: The description links the photo to the July 1966 West Side unrest even as hedged guess, while the catalog record places it after a gang-fight breakup in northwest Chicago, which is an event/place contradiction.<br>kimi-k2.6 5: Every claim is visible in the image or supported by the catalog record. The burning police squad car, smoke, flames, elevated vantage point, streetlight/utility pole arm, crowds, and buildings are all visible. The attribution to Mel Larsen and Chicago Sun-Times matches the catalog title. The 'likely connected to July 1966 West Side unrest' is properly hedged. |

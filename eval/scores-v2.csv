@@ -13,7 +13,7 @@ photo,group,title,thumbnail,accuracy,completeness,usefulness,reference,notes
 12,C,Oak Street Beach crowd,no,5,5,4,4,Accurate; drops the Oak Street guess; longer opening about text
 13,C,American Derby 1904 panorama,no,5,5,5,5,Now reads the handwritten caption in the second sentence; notes the panorama seams
 14,C,Paddy Murray shooting (two photos),yes,5,2,4,2,Flagged low resolution. No longer calls the stretcher 'the victim'; says faces can't be made out. Still misses the body. Completeness: misses the body on the sidewalk and the police. Usefulness now 4: opens with layout
-15,C,Squad car set afire 1966,yes,5,3,4,3,Flagged low resolution. Drops the invented 'West Side unrest' link. Still misses the car on its side. Completeness: misses the second cruiser and that the car is on its side. Usefulness now 4: never says plainly that the fire is a burning car
+15,C,Squad car set afire 1966,yes,4,3,4,3,Flagged low resolution. Drops the invented 'West Side unrest' link. Still misses the car on its side. Completeness: misses the second cruiser and that the car is on its side. Usefulness now 4: never says plainly that the fire is a burning car. Accuracy now 4: calls the light car at lower right 'parked'; it is crashed
 16,D,Bird's-eye view of Philadelphia 1872,no,5,5,5,4,"Header, title and credits now in the description itself; reads 'Delaware' on the river"
 17,D,Ruins of Pittsburgh after the 1845 fire,no,5,5,5,4,Reads the title and all credits; but no longer says the ruins were caused by a fire (the stricter rule removed a correct fact)
 18,D,Diamond Street from above,yes,5,5,4,4,Flagged low resolution. Drops the 'late-1920s automobiles' claim. Usefulness now 4: 'no writing is visible' filler

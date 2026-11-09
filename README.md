@@ -96,6 +96,8 @@ Runs the unit tests with Node's built-in test runner. They don't make network ca
 
 ## Evaluation
 
+The full write-up, covering the design choices, the rubric, both rounds and the model judges, is in [docs/WRITEUP.md](docs/WRITEUP.md).
+
 Unit tests check the code. They can't tell me whether the descriptions are any good, so I scored them against a rubric, changed the app based on what I found, and scored again.
 
 ### Method
@@ -115,7 +117,7 @@ Claude drafted the scores. Four other models graded the same descriptions indepe
 
 ### Round 1 (v1): what I found
 
-1. **Image size mattered more than how hard the photo was.** For 5 of the 20 photos, LoC only offers a 150-pixel thumbnail, and the app sent it anyway. Those 5 averaged 3.2 for accuracy, against 4.8 for the rest, and they included every serious mistake. On photo 14 the model said a stretcher carried "presumably the victim"; the record says it was the gang's lawyer. The model said the image was too small in only 2 of the 5 cases.
+1. **Image size mattered more than how hard the photo was.** For 5 of the 20 photos, LoC only offers a 150-pixel thumbnail, and the app sent it anyway. Those 5 averaged 3.4 for accuracy, against 4.8 for the rest, and they included every serious mistake. On photo 14 the model said a stretcher carried "presumably the victim"; the record says it was the gang's lawyer. The model said the image was too small in only 2 of the 5 cases.
 2. **It filled gaps with plausible history.** It linked a 1966 burning squad car to "the July 1966 West Side unrest", but the record says it was a gang fight on the northwest side. On two photos it replaced the catalog date with its own guess, without any visible evidence.
 3. **It read text in images very well, but didn't always put it first.** All four signs were transcribed correctly, down to an artist's signature and a tiny sticker. On the dense prints, though, the title and banner text only appeared at the end of the "notable details" list.
 
@@ -136,7 +138,7 @@ Same 20 photos, same model, same scoring. Each cell is v1 → v2.
 | 1 | A | Harriet Tubman standing portrait | 4 → 5 | 5 → 5 | 4 → 4 | 5 → 5 |
 | 2 | A | Woman with pearls and gloves | 5 → 5 | 5 → 5 | 4 → 4 | 5 → 5 |
 | 3 | A | Woman holding a newspaper | 5 → 5 | 5 → 5 | 4 → 4 | 5 → 5 |
-| 4 | A | Family portrait NYC *(150px)* | 3 → 4 | 2 → 2 | 4 → 4 | 3 → 3 |
+| 4 | A | Family portrait NYC *(150px)* | 4 → 4 | 2 → 2 | 4 → 4 | 3 → 3 |
 | 5 | A | Two men on the sidewalk | 5 → 5 | 5 → 5 | 4 → 4 | 5 → 5 |
 | 6 | B | Bloom Jeweler neon clock sign | 5 → 5 | 4 → 4 | 5 → 5 | 4 → 4 |
 | 7 | B | Castle Clinton sign | 5 → 5 | 5 → 5 | 5 → 5 | 5 → 5 |
@@ -147,7 +149,7 @@ Same 20 photos, same model, same scoring. Each cell is v1 → v2.
 | 12 | C | Oak Street Beach crowd | 5 → 5 | 5 → 5 | 5 → 4 | 5 → 4 |
 | 13 | C | American Derby 1904 panorama | 5 → 5 | 5 → 5 | 4 → 5 | 5 → 5 |
 | 14 | C | Paddy Murray shooting (two photos) *(150px)* | 2 → 5 | 2 → 2 | 4 → 4 | 1 → 2 |
-| 15 | C | Squad car set afire 1966 *(150px)* | 2 → 5 | 3 → 3 | 5 → 4 | 3 → 3 |
+| 15 | C | Squad car set afire 1966 *(150px)* | 2 → 4 | 3 → 3 | 5 → 4 | 3 → 3 |
 | 16 | D | Bird's-eye view of Philadelphia 1872 | 5 → 5 | 5 → 5 | 4 → 5 | 4 → 4 |
 | 17 | D | Ruins of Pittsburgh after the 1845 fire | 5 → 5 | 5 → 5 | 5 → 5 | 5 → 4 |
 | 18 | D | Diamond Street from above *(150px)* | 4 → 5 | 5 → 5 | 4 → 4 | 4 → 4 |
@@ -159,13 +161,13 @@ Notes on each score are in [eval/scores-v1.csv](eval/scores-v1.csv) and [eval/sc
 
 | Subset | Photos | Accuracy (v1 → v2) | Completeness (v1 → v2) | Usefulness (v1 → v2) | Matches reference (v1 → v2) |
 | --- | --- | --- | --- | --- | --- |
-| **All** | 20 | 4.40 → 4.95 | 4.40 → 4.35 | 4.30 → 4.35 | 4.15 → 4.10 |
-| Easy (group A) | 5 | 4.40 → 4.80 | 4.40 → 4.40 | 4.00 → 4.00 | 4.60 → 4.60 |
-| Hard (groups C, D) | 10 | 4.10 → 5.00 | 4.30 → 4.30 | 4.20 → 4.30 | 3.90 → 3.80 |
+| **All** | 20 | 4.45 → 4.90 | 4.40 → 4.35 | 4.30 → 4.35 | 4.15 → 4.10 |
+| Easy (group A) | 5 | 4.60 → 4.80 | 4.40 → 4.40 | 4.00 → 4.00 | 4.60 → 4.60 |
+| Hard (groups C, D) | 10 | 4.10 → 4.90 | 4.30 → 4.30 | 4.20 → 4.30 | 3.90 → 3.80 |
 | Full-size image | 15 | 4.80 → 5.00 | 4.80 → 4.80 | 4.33 → 4.47 | 4.67 → 4.53 |
-| 150px thumbnail only | 5 | 3.20 → 4.80 | 3.20 → 3.00 | 4.20 → 4.00 | 2.60 → 2.80 |
+| 150px thumbnail only | 5 | 3.40 → 4.60 | 3.20 → 3.00 | 4.20 → 4.00 | 2.60 → 2.80 |
 
-1. **Accuracy went up the most where it was worst.** On the 5 thumbnails it went from 3.2 to 4.8. All 5 were flagged correctly. The model stopped guessing (no more "the victim", no invented riot, no "late-1920s automobiles") and said what it couldn't see. On full-size images every description scored 5 for accuracy.
+1. **Accuracy went up the most where it was worst.** On the 5 thumbnails it went from 3.4 to 4.6. All 5 were flagged correctly. The model stopped guessing (no more "the victim", no invented riot, no "late-1920s automobiles") and said what it couldn't see. One slip remains: both versions call a crashed car in the squad-car photo "parked". On full-size images every description scored 5 for accuracy.
 2. **Completeness and matching the reference didn't improve (4.40 → 4.35 and 4.15 → 4.10).** On the thumbnails, completeness stayed around 3. Being careful stops the model from making things up, but it can't make a 150px image show Muhammad Ali, a second police car or two dogs. That limit is in the source data, not the prompt.
 3. **The stricter prompt had costs.** It removed some correct context: the Pittsburgh print no longer says the ruins came from a fire, and the Bloom Jeweler sign lost its diamond-ring hint. It also added filler: many descriptions now start with "no text is visible on the image" or "identified by the catalog title", which a screen-reader user has to sit through.
 
@@ -185,7 +187,7 @@ Four models on NanoGPT (DeepSeek V4.1 Flash, Kimi K2.6, Gemma 4 31B and Muse Spa
 | Gemma 4 31B | 4.45 | 3.30 | 4.62 | 3.50 | 3.97 |
 
 1. **Claude ranks first because it leaves out less.** It isn't the most accurate (DeepSeek is) or the easiest to listen to (Kimi is). The other models write shorter descriptions that miss more.
-2. **The judges agree with the baseline.** The median of the four is within 1 point of the baseline on 95–100% of descriptions, with no overall bias. Kimi is the strictest, about 0.4 below the baseline on average.
+2. **The judges agree with the baseline.** The median of the four is within 1 point of the baseline on 98–100% of descriptions, with no overall bias. Kimi is the strictest, about 0.4 below the baseline on average.
 3. **Only Gemma favors its own descriptions,** scoring them about 0.4 higher than the other judges do.
 4. **Judges miss errors in the "notable details" list.** On the squad car (v1), only one of four judges caught the wrong event guess at the end of that list.
 
