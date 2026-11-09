@@ -188,7 +188,7 @@ Four models on NanoGPT (DeepSeek V4.1 Flash, Kimi K2.6, Gemma 4 31B and Muse Spa
 
 1. **Claude ranks first because it leaves out less.** It isn't the most accurate (DeepSeek is) or the easiest to listen to (Kimi is). The other models write shorter descriptions that miss more.
 2. **The judges agree with the baseline.** The median of the four is within 1 point of the baseline on 98–100% of descriptions, with no overall bias. Kimi is the strictest, about 0.4 below the baseline on average.
-3. **Only Gemma favors its own descriptions,** scoring them about 0.4 higher than the other judges do.
+3. **Self-preference is small.** Gemma scores its own descriptions 0.38 higher than the other judges do, but it is generous in general (+0.26). After allowing for that, no judge favors its own work by more than about 0.1.
 4. **Judges miss errors in the "notable details" list.** On the squad car (v1), only one of four judges caught the wrong event guess at the end of that list.
 
 ### What I'd change next

@@ -23,22 +23,22 @@ Node server ──HTML results page──▶ Browser
 **3. Describe.** All 5 images go to the Claude Messages API in one request. Each image is an `image` content block (base64), preceded by a text label with the photo number, the catalog title, the catalog year and, if needed, a low-resolution marker:
 
 ```
-Photo 5: "Squad car set afire in disorder" (catalog date: 1966) [LOW RESOLUTION: small thumbnail, fine detail is not visible]
+Photo 5: "Squad car set afire in disorder / photo by Mel Larsen, Chicago Sun-Times." (catalog date: 1966) [LOW RESOLUTION: small thumbnail, fine detail is not visible]
 ```
 
 The instructions come after the images. The request uses **structured outputs**: a JSON schema requires one entry per photo, each with `photo_number`, `description`, `estimated_period` and `notable_details`. Other settings:
 
 - `max_tokens` is 16,000 and `effort` is medium.
 - `fallbacks: "default"` retries on Anthropic's recommended fallback model if a safety classifier declines the request.
-- The headers are `x-api-key` and `anthropic-version`.
+- The headers are `x-api-key`, `anthropic-version`, and an `anthropic-beta` header that enables the fallback.
 
 The server checks `stop_reason` and reports a refusal or a cut-off answer as an error instead of showing a half-finished page. The default model is `claude-opus-5-5`; it can be changed with the `CLAUDE_MODEL` setting.
 
-**4. Render.** The server builds the HTML itself. Every value from LoC or Claude is HTML-escaped before it goes on the page, so neither service can inject markup. Each result shows the image, the description, the estimated period, the notable details, a link to the LoC record and, for low-resolution images, a notice that detail is limited.
+**4. Render.** The server builds the HTML itself. Every value from LoC or Claude is HTML-escaped before it goes on the page, so neither service can inject markup. Each result shows the image, a notice for low-resolution images, the estimated period, the description, the notable details and a link to the LoC record.
 
 **Around the pipeline:**
 - Finished results are cached in memory for an hour (up to 100 searches), so repeating a search doesn't call either API again.
-- Every outbound request has a timeout: 15 seconds for LoC, 3 minutes for Claude. Redirects are followed up to 5 times.
+- Every outbound request has a timeout: 15 seconds for LoC, 3 minutes for Claude. Requests to LoC follow up to 5 redirects; the Claude call doesn't follow redirects.
 - Input over 100 characters gets a 400 response. A failure at LoC or Claude gets a 502 page, and the details go to the server log.
 
 ## 2. What it's built with, and why
@@ -70,7 +70,7 @@ I picked 20 LoC photos, as 4 searches of 5:
 | C | "crowd" in Chicago | Hard: news photos, crowds, events |
 | D | "bird's eye view" in Pennsylvania | Hard: dense prints and maps full of small text |
 
-I chose every photo because an LoC cataloger had written a summary of what it shows ("Photograph shows…"). The app never sees these summaries, so they serve as a human-written reference. Five of the 20 turned out to be available only as 150-pixel thumbnails. That's an LoC rights restriction, and the app sent them anyway, which became the most important finding.
+I chose every photo because an LoC cataloger had written a summary of what it shows ("Photograph shows…"). The app never sees these summaries, so they serve as a human-written reference. Five of the 20 turned out to be available only as 150-pixel thumbnails. LoC offers only a thumbnail for some items, usually because of rights restrictions, and the app sent them anyway.
 
 `node eval/run.js <version>` runs each group through the app's own download and Claude code, with the same prompt, model and batches as a real search. It saves the descriptions next to the references.
 
@@ -95,7 +95,7 @@ The old rubric and its scores are kept in [eval/archive/three-score-rubric/](../
 ### 3.3 Round 1 (v1): what went wrong
 
 1. **Image size mattered more than how hard the photo was.** The 5 thumbnails averaged 3.4 for accuracy, against 4.8 for the full-size images, and they included every serious error. On one, the model said a stretcher carried "presumably the victim"; the record says it was the gang's lawyer. The model mentioned the small size in only 2 of the 5 cases.
-2. **It filled gaps with plausible history.** It linked the burning squad car to the wrong riot, and on two photos it replaced the catalog date with its own guess, without any visible evidence.
+2. **It filled gaps with plausible history.** It linked the burning squad car to the wrong riot, and on two photos it replaced the catalog date with its own guess, on thin evidence (for the Tubman portrait, "clothing and studio style").
 3. **It read text very well but didn't always put it first.** All four signs were transcribed correctly, down to an artist's signature and a small sticker. On the dense prints, though, the title and banner text appeared only at the end of the "notable details" list.
 
 ### 3.4 What changed in v2
@@ -120,14 +120,14 @@ Same 20 photos, same model. Each cell is v1 → v2.
 
 - **Accuracy improved most where it was worst.** All 5 thumbnails were flagged. The model stopped guessing and said what it couldn't see. Every full-size description scored 5.
 - **Completeness and the reference match didn't improve.** A stricter prompt prevents made-up details, but it can't make a 150-pixel image show two dogs or Muhammad Ali's face. That limit is in the source data.
-- **The stricter prompt had costs.** It dropped some correct context: the Pittsburgh print no longer says the ruins came from the 1845 fire. It also added filler: many descriptions now open with "no text is visible on the image", which a screen-reader user has to sit through.
+- **The stricter prompt had costs.** It dropped some correct context: the Pittsburgh print no longer says the ruins came from the 1845 fire. It also added filler: about 6 of the 20 descriptions now open with a sentence like "no text is visible on the image", which a screen-reader user has to sit through.
 
 ### 3.6 Other models, as authors and as judges
 
 Four vision models on NanoGPT each wrote their own descriptions of the 20 photos, using the app's v2 prompt: DeepSeek V4.1 Flash, Kimi K2.6, Gemma 4 31B and Muse Spark 1.3. Each of them then graded all six sets of descriptions, 480 grades in total ([eval/judge.js](../eval/judge.js)). The setup:
 
 - **Judges didn't know who wrote a description** and saw them in a shuffled order.
-- **A judge saw** the photo, the catalog record, the reference summary and the rubric. The rubric's example column was removed so the judges couldn't see our scores.
+- **A judge saw** the photo, the catalog record, the reference summary and the rubric. The rubric's example column was removed so the judges couldn't see the human-checked scores.
 - **Each judge wrote a one-sentence reason before each score.** Answers were requested as JSON and checked in code. Kimi returned empty answers when given a strict JSON schema, so all judges used plain JSON mode.
 - **A model's grades of its own descriptions were left out** of the ranking.
 
@@ -140,9 +140,53 @@ Four vision models on NanoGPT each wrote their own descriptions of the 20 photos
 | Kimi K2.6 | 4.47 | 3.78 | 4.72 | 3.57 | 4.13 |
 | Gemma 4 31B | 4.45 | 3.30 | 4.62 | 3.50 | 3.97 |
 
-**Claude ranks first because it leaves out less.** It isn't the most accurate (DeepSeek is) or the easiest to listen to (Kimi is). The other models wrote 64–109 words per photo on average, against Claude's 115–138, and their completeness scores show what that cost.
+**Claude ranks first because it leaves out less.** It isn't the most accurate (DeepSeek is) or the easiest to listen to (Kimi is). The other models' descriptions averaged 64–109 words, against Claude's 115–138 (description text only, not counting the notable details), and their completeness scores show what that cost.
 
-**The judges mostly agree with the human-checked scores.** The median of the four judges is within 1 point of the human-checked score on 98–100% of descriptions, with no overall bias. Kimi is the strictest judge, scoring about 0.4 below on average. Only Gemma clearly favors its own work, by about 0.4 points.
+**The judges mostly agree with the human-checked scores.** The median of the four judges is within 1 point of the human-checked score on 98–100% of descriptions, and the median shows no overall bias. This was measured after some human-checked scores had been revised, partly because the judges disagreed with them (section 5). So it overstates how independently the two agree.
+
+### 3.7 How each judge graded
+
+The four judges agree on the order but not on how generous to be.
+
+| Judge | Average score given | Share of 5s | Top two (excluding itself) | Average gap from human-checked scores |
+| --- | --- | --- | --- | --- |
+| Gemma 4 31B | 4.38 | 65% | Claude v1, Claude v2 | +0.13 (more generous) |
+| Muse Spark 1.3 | 4.20 | 54% | Claude v1, Claude v2 | −0.02 |
+| DeepSeek V4.1 Flash | 4.17 | 48% | Claude v1, Claude v2 (tied) | −0.07 |
+| Kimi K2.6 | 3.92 | 36% | Claude v2, Claude v1 | −0.39 (stricter) |
+
+- **The top of the order is the same across judges.** Every judge put the two Claude versions first and second. The other four models were close, and their order changed from judge to judge, so that part of the ranking isn't reliable.
+- **The scale isn't the same.** Gemma gives a 5 almost twice as often as Kimi. A single judge's raw score is only comparable to other scores from that same judge, which is why the ranking uses all four and leaves out self-grades.
+- **Every judge was hardest on Completeness and Matches reference**, and easiest on Accuracy and Usefulness. The human-checked scores also put Accuracy highest and Matches reference lowest, but rate Usefulness about the same as Completeness. In short, the descriptions rarely say anything false, but they often leave things out.
+- **Their reasons are usable.** Each judge wrote a one-sentence reason per score. In the disagreements I reviewed, the reason showed why the judge scored differently, such as "clearly hedged so it is not a slip" or "the main subject is in the first sentence". That makes disagreements quick to review. [eval/REVIEW.md](../eval/REVIEW.md) shows every reason next to its score for Claude's descriptions.
+
+### 3.8 How the judges graded their own descriptions
+
+Each model also graded its own descriptions, without being told they were its own. Those grades were left out of the ranking above and compared separately:
+
+A raw comparison is misleading, because a generous judge scores everything higher, its own work included. So the table also shows each judge's general lean, which is how far it scores above or below the other judges on descriptions it didn't write. The last column is the self-preference left after taking that lean out.
+
+| Model | Own descriptions: by itself | Same, by the other three | Raw gap | General lean | Self-preference after the lean |
+| --- | --- | --- | --- | --- | --- |
+| Gemma 4 31B | 4.35 | 3.97 | +0.38 | +0.26 | +0.12 |
+| DeepSeek V4.1 Flash | 4.21 | 4.15 | +0.07 | +0.01 | +0.06 |
+| Muse Spark 1.3 | 4.17 | 4.14 | +0.04 | +0.07 | −0.03 |
+| Kimi K2.6 | 3.90 | 4.13 | −0.23 | −0.34 | +0.10 |
+
+- **Self-preference is small for all four.** After taking out each judge's general lean, no judge favors its own work by more than about a tenth of a point.
+- **Gemma looks biased only at first glance.** Its +0.38 raw gap is mostly its general generosity (+0.26).
+- **Kimi looks self-critical, but isn't.** It scores its own work below what the others give it, yet it's less strict with itself (−0.23) than with everyone else (−0.34).
+- **No judge ranked its own descriptions first,** so leaving self-grades in wouldn't have changed the ranking. Leaving them out is still the safer default.
+
+### 3.9 A note on Kimi K2.6: don't use it as a judge
+
+Kimi K2.6 was much slower than the other three models.
+- **It was always last.** It finished last in every run, so the whole evaluation had to wait for it.
+- **Its connection kept dropping.** In the final run it caused 21 of the 33 connection resets. Some of this may come from the provider rather than the model, but the other three models used the same provider.
+- **It stalled the first run** halfway, when its requests used up their retries.
+- **It needed a workaround.** It returned empty answers when asked for a strict JSON schema, so all judges had to drop to plain JSON mode.
+
+Its grades were reasonable, just the strictest of the four. They don't add enough to justify the wait. For a judge panel meant to run without supervision, speed and reliability matter more than one extra opinion, so I'd leave Kimi out and use three judges, or replace it with a faster model.
 
 ## 4. Two photos up close
 
@@ -151,9 +195,9 @@ Four vision models on NanoGPT each wrote their own descriptions of the 20 photos
 LoC only offers this photo as a 150-pixel thumbnail. The cataloger's reference reads: "a family of two fathers, three sons, and two dogs seated in a room."
 
 - **v1** said "several adults" sit on a sofa with "a few young children" on the floor, and listed "multiple generations" in the details. It didn't mention the dogs.
-- **v2**, told the image was a thumbnail, wrote "several adults and children" and said faces and smaller objects couldn't be made out. That's more honest, but still no dogs and no count.
+- **v2**, told the image was a thumbnail, wrote "several adults and children" and dropped "multiple generations". Like v1, it said faces and small details couldn't be made out. Still no dogs and no count.
 
-I first gave v1 a 3 for accuracy, counting both "several adults" and "multiple generations" as slips. On a second look, "multiple generations" is technically true for fathers and sons, so it's one slip and a 4. The judges gave it 5, except Kimi, which gave 4 for "several adults".
+I first gave v1 a 3 for accuracy, counting both "several adults" and "multiple generations" as slips. On a second look, "multiple generations" is technically true for fathers and sons, so it's one slip and a 4. Three judges gave it 5. Kimi gave 4, citing "sofa and armchairs" in the details list.
 
 The bigger gap is what's missing: a blind reader never learns there are two dogs in the room. Under the original three-score rubric, that cost a point only because the cataloger happened to mention the dogs. This photo is why the rubric now has a Completeness score. Both versions score 2 on it.
 
@@ -167,17 +211,17 @@ This is another 150-pixel thumbnail. The reference reads: "a police cruiser on i
 
 **v2** dropped the event guess, as the new prompt requires, but still calls the crashed car parked. Accuracy: **4**. Neither version notices that the burning car is on its side, or that there's a second damaged police car.
 
-Three of the four judges gave v1 a 5 for accuracy. Their reasons mention only the main description. The one judge that commented on the details list (Muse Spark) caught the wrong event and gave a 2. This is the only photo where the judge panel and the human-checked score still differ by 2 or more points.
+Three of the four judges gave v1 a 5 for accuracy. Gemma's and DeepSeek's reasons don't mention the event guess at all. Kimi saw it but called it "properly hedged". Only Muse Spark applied the rule and gave a 2. This is the only photo where the judge panel and the human-checked score still differ by 2 or more points.
 
 ## 5. Human-checked scores compared with the model judges
 
 The baseline scores were drafted by Claude, cross-checked against the four judges, and verified by a person against the images. Disagreements of 2 or more points were checked first.
 
 **What the person did that the judges didn't:**
-- **Read everything.** The judges graded the main description and mostly skipped the notable-details list, which is where the squad car's wrong event was.
-- **Applied the rubric literally to hedges.** Most judges treated "likely" or "possibly" as an excuse even when the guess was contradicted by the record.
-- **Counted.** The judges mostly accepted vague words like "several adults" without counting the people in the photo.
-- **Looked closely at small details.** No judge noticed that the "parked" car in the squad-car photo has crashed.
+- **Read everything.** On the squad car, two of the four judges' reasons never mention the wrong event in the notable-details list.
+- **Applied the rubric literally to hedges.** Kimi excused the wrong event because it was hedged. Under the earlier rubric, all four judges did.
+- **Counted.** Only 3 of the 8 judge grades of the family portrait questioned "several adults" for two people.
+- **Looked closely at small details.** Only one judge (DeepSeek, on v2) noticed that the "parked" car in the squad-car photo looks damaged, and it took off only a point.
 
 **What the judges did well:**
 - **Agreed on the main findings.** With no overall bias, the judges reached the same conclusions: v2 is more accurate, the thumbnails cause most errors, and Claude covers more than the other models.
@@ -199,7 +243,7 @@ On their own terms, the descriptions are better than the cataloger's summaries. 
 - **Full text:** every sign transcribed, down to a small RONMAR sticker on an awning.
 - **Corrections:** in one case it fixed the cataloger, describing a wicker basket that the reference calls a purse.
 
-**The reference wins on what can't be seen.** It knows that a 150-pixel figure is Muhammad Ali with Malcolm X beside him, that the stretcher carries the gang's lawyer, and which riot the squad car belongs to. The model can only use that knowledge when the title gives it. When it guessed instead, it was usually wrong, which is why v2 forbids guessing. A blind reader needs both: the model's description of what's there, and the catalog's facts about who and when.
+**The reference wins on what can't be seen.** It knows that a 150-pixel figure is Muhammad Ali with Malcolm X beside him, that the stretcher carries the gang's lawyer, and what led to the squad car being burned. The model can only use that knowledge when the title gives it. When v1 guessed beyond the title, several guesses were wrong (the event, "the victim", two dates), which is why v2 forbids guessing. A blind reader needs both: the model's description of what's there, and the catalog's facts about who and when.
 
 ## 7. What the descriptions don't do
 
@@ -214,10 +258,24 @@ The v2 prompt ("only state what you can see") pushes further in this direction. 
 
 **That may be the right call.** A sighted viewer forms their own view of what a photo means. A description that says "the photographer frames the ruins to emphasize their scale" makes that judgment for the reader, and it's a guess about intent that can't be checked against the catalog. Describing the composition plainly lets a blind reader reach their own conclusions: the viewpoint, the main lines and shapes, what's large and what's small, what's in focus. A possible middle ground is a separate, optional "composition" field that sticks to what's visible and leaves interpretation out.
 
-## 8. Limitations and next steps
+## 8. What I'd do differently next time
+
+These are changes to how I'd run the evaluation, not to the app.
+
+1. **Pilot the rubric before scoring everything.** Both rubric problems, the missing Completeness score and the contradictory hedge rule, came up only after all 40 descriptions were scored and judged, and fixing them meant re-scoring and re-running 480 grades. Scoring 3 or 4 photos with the rubric and two judges first would have found both in minutes.
+2. **Score blind first.** The human check started from Claude's draft scores, so the draft could anchor the person checking it. Next time the person would score a sample without seeing the draft or the judges, then compare.
+3. **Check image sizes when choosing photos.** A quarter of the set turned out to be 150-pixel thumbnails by accident. They were the most informative photos, but that should be a planned subset of known size.
+4. **Make the judges show their evidence.** Ask each judge to quote the exact claim it is marking down, and to say that it checked the notable-details list. That would have caught the squad car's wrong event, and makes reasons easier to verify.
+5. **Choose judges for speed and reliability, and test them first.** One quick test call per model, with an image and the exact JSON format, would have shown up Kimi's slowness and its JSON-schema problem before the main run (see 3.9).
+6. **Record time and cost per call, and tag every grade with the rubric version.** The judge script didn't log either. Timing would have put numbers on the Kimi problem, and version tags would have made archiving old grades automatic.
+7. **Use more photos, and a second person on a sample.** 20 photos found the patterns. Around 50, with a second person scoring 10 of them, would make the averages and the rubric's consistency more reliable.
+
+## 9. Limitations and next steps
 
 **Limitations:**
-- **Small sample.** 20 photos is enough to find patterns but too few for small differences to be reliable. The gap between Claude v1 (4.30) and v2 (4.27) on the judges' ranking means nothing.
+- **Small sample.** 20 photos is enough to find patterns but too few for small differences to be reliable. The gap between Claude v1 (4.30) and v2 (4.27) on the judges' ranking is within noise.
+- **v2 was tested on the photos it was written from.** The v2 rules came from v1's mistakes on these 20 photos and were scored on the same 20, and the rubric was also revised after seeing results. A fair test of v2 needs new photos.
+- **No blind users.** "Usefulness to a blind reader" is my own judgment of what a listener needs, not something tested with screen-reader users.
 - **One person checked the baseline.** A second person scoring a sample would show how consistent the rubric is.
 - **Thumbnails.** The thumbnail problem is in the source: when LoC only offers 150 pixels, no prompt can recover what isn't there.
 

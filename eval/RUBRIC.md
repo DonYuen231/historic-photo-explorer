@@ -23,7 +23,7 @@ A guess that is clearly hedged ("possibly", "appears to be") is not a slip, **wi
 | --- | --- | --- |
 | **5** | Every claim is visible in the image or stated in the catalog record (title, date). | Cuchifrito sign: every word and object it mentions is there, down to the RONMAR sticker. |
 | **4** | One minor slip: a small detail stated as fact that can't be checked or is slightly off, **or** a date/period that goes against the catalog date with no visible evidence. The main subject is right. | Tubman (v1): gives "late 1860s to 1870s" against a catalog date of 1895, with no evidence. |
-| **3** | Two or more minor slips, **or** one clearly wrong claim about a secondary detail. The main subject is still right. | Family portrait (v1): "multiple generations" and "several adults" (there are two). |
+| **3** | Two or more minor slips, **or** one clearly wrong claim about a secondary detail. The main subject is still right. | None in this eval after review. (Family portrait v1 was first scored 3 here, then raised to 4: "several adults" for two is a slip, "multiple generations" is technically true.) |
 | **2** | A wrong claim about the main subject, **or** it links the photo to a person or event the record contradicts (hedged or not). | Squad car (v1): "likely connected to the July 1966 West Side unrest"; the record says it was a gang fight on the northwest side. |
 | **1** | Mostly describes things that aren't there. | None in this eval. |
 
