@@ -3,9 +3,9 @@
 /**
  * Summarizes the model judges' grades (eval/judges/grades.json):
  *   1. Which descriptions scored best: Claude v1, Claude v2 and each other model's own.
- *   2. How closely each judge agrees with the hand-checked scores (scores-v1/v2.csv).
+ *   2. How closely each judge agrees with the human-verified baseline (scores-v1/v2.csv).
  *   3. Whether judges favor their own descriptions.
- *   4. Photos where the judges and the hand scores disagree by 2+ points (check these first).
+ *   4. Photos where the judges and the baseline disagree by 2+ points (check these first).
  *
  * Usage: node eval/compare.js    Writes eval/judges/summary.md and prints it.
  */
@@ -64,7 +64,7 @@ function summarizeGrades(grades, handScores) {
 	);
 
 	// 2. Agreement with the hand-checked scores on Claude's descriptions.
-	out.push("\n## 2. How closely each judge agrees with the hand scores (Claude v1 + v2, 40 descriptions)\n");
+	out.push("\n## 2. How closely each judge agrees with the human-verified baseline (Claude v1 + v2, 40 descriptions)\n");
 	const agreeRows = [];
 	const judgeSets = [...judges.map((j) => [j, (g) => g.judge === j]), ["**judge panel (median)**", null]];
 	for (const [name, filter] of judgeSets) {
@@ -87,8 +87,8 @@ function summarizeGrades(grades, handScores) {
 		agreeRows.push([name, ...KEYS.map(cellFor), fmt(mean(diffs.map((x) => x.d)))]);
 	}
 	out.push(
-		"Each cell: average gap from the hand score in points (share within 1 point). " +
-			"Bias above 0 means the judge scores higher than the hand scores.\n"
+		"Each cell: average gap from the baseline score in points (share within 1 point). " +
+			"Bias above 0 means the judge scores higher than the baseline.\n"
 	);
 	out.push(table(["Judge", ...KEYS.map((k) => LABELS[k]), "Bias"], agreeRows));
 
@@ -104,7 +104,7 @@ function summarizeGrades(grades, handScores) {
 	out.push(table(["Model", "Own descriptions, graded by itself", "Same descriptions, graded by the others", "Difference"], selfRows));
 
 	// 4. Big disagreements with the hand scores.
-	out.push("\n## 4. Where the judge panel and the hand scores differ by 2+ points\n");
+	out.push("\n## 4. Where the judge panel and the baseline differ by 2+ points\n");
 	const flagged = [];
 	for (const author of ["claude-v1", "claude-v2"]) {
 		for (let photo = 1; photo <= 20; photo++) {
@@ -120,7 +120,7 @@ function summarizeGrades(grades, handScores) {
 			}
 		}
 	}
-	out.push(flagged.length ? table(["Version", "Photo", "Score", "Hand", "Panel median", "Judges' reasons"], flagged) : "None.");
+	out.push(flagged.length ? table(["Version", "Photo", "Score", "Baseline", "Panel median", "Judges' reasons"], flagged) : "None.");
 
 	return out.join("\n");
 }

@@ -96,7 +96,7 @@ Runs the unit tests with Node's built-in test runner. They don't make network ca
 
 ## Evaluation
 
-Unit tests check the code. They can't tell me whether the descriptions are any good, so I scored them by hand, changed the app based on what I found, and scored again.
+Unit tests check the code. They can't tell me whether the descriptions are any good, so I scored them against a rubric, changed the app based on what I found, and scored again.
 
 ### Method
 
@@ -109,7 +109,7 @@ I picked 20 Library of Congress photos as 4 searches of 5: portraits (easy), sig
 
 Every level from 1 to 5 is defined in **[eval/RUBRIC.md](eval/RUBRIC.md)**, with an example from this eval for each. An earlier three-score version of the rubric, and the scores made with it, are kept in [eval/archive/three-score-rubric/](eval/archive/three-score-rubric/).
 
-Claude drafted the scores; I then checked each one against the image ([review sheets](eval/), [v1 scores](eval/scores-v1.csv), [v2 scores](eval/scores-v2.csv)). Model: `claude-opus-5-5`, November 2026.
+Scores were checked by several models and then by a person. Claude drafted them. A panel of four other models graded the same descriptions independently (see [Model judges](#model-judges)). A person then checked the scores against the images, starting with every score where the panel and the draft differed by 2 or more points. These 40 checked scores are the baseline used to measure the model judges ([review sheets](eval/), [v1 scores](eval/scores-v1.csv), [v2 scores](eval/scores-v2.csv)). Model: `claude-opus-5-5`, November 2026.
 
 ### Round 1 (v1): what I found
 
@@ -169,7 +169,7 @@ Notes on each score are in [eval/scores-v1.csv](eval/scores-v1.csv) and [eval/sc
 
 ### Model judges
 
-To check my hand scores and compare Claude with other vision models, four models on NanoGPT (DeepSeek V4.1 Flash, Kimi K2.6, Gemma 4 31B and Muse Spark 1.3) each:
+To cross-check the scores and compare Claude with other vision models, four models on NanoGPT (DeepSeek V4.1 Flash, Kimi K2.6, Gemma 4 31B and Muse Spark 1.3) each:
 
 1. wrote their own descriptions of the same 20 photos, using the app's v2 prompt, and
 2. graded all six sets (Claude v1, Claude v2 and the four models' own) with the same rubric, blind to who wrote them. The judges saw the photo, catalog record, reference summary and rubric, but not the rubric's examples.
@@ -186,7 +186,7 @@ To check my hand scores and compare Claude with other vision models, four models
 | Gemma 4 31B | 4.45 | 3.30 | 4.62 | 3.50 | 3.97 |
 
 1. **Claude ranks first because it covers more**, not because it's more accurate: DeepSeek is the most accurate, and Kimi's are the easiest to listen to. The other models write shorter descriptions that leave more out.
-2. **The judges agree with my hand scores.** The panel's median score is within 1 point of mine on 95–100% of descriptions, with no overall bias. Kimi is the strictest judge, scoring about 0.4 below me on average.
+2. **The judges agree with the checked baseline.** The panel's median score is within 1 point of the baseline on 95–100% of descriptions, with no overall bias. Kimi is the strictest judge, scoring about 0.4 below the baseline on average.
 3. **Judges mostly don't favor their own work.** Gemma is the exception, scoring its own descriptions about 0.4 higher than the other judges do.
 4. **Judges miss errors hidden in the "notable details" list.** On the squad car (v1), only one of four judges caught the wrong event guess, which sits at the end of that list. Most judges seem to grade the main description and skim the rest.
 
@@ -194,7 +194,8 @@ To check my hand scores and compare Claude with other vision models, four models
 
 - **Only mention text when there is some.** Add "If there's no text on the image, don't say so" to the prompt, to remove the filler.
 - **Allow well-known context from the title.** Let the model explain an event the title clearly refers to (a print titled "ruins of Pittsburgh" can mention the 1845 fire), while still not linking a photo to an event the title doesn't mention.
-- **Make the eval less dependent on one person.** Have a second person score a sample of photos to check that the scores agree, and add photos where the main subject is a person the reference names, to test identification more directly.
+- **Make further checking fully model-based.** Having a person check every score doesn't scale past a few dozen photos, so new photos will be scored by the judge panel alone. The 40 checked scores become a calibration set. When the prompt, rubric or judge models change, re-run the panel on that set, and trust its scores only while its median stays within 1 point of the baseline. The judges' prompt should also tell them to check the notable-details list, where they missed an error.
+- **Test identification more directly.** Add photos where the main subject is a person the reference names.
 
 ## Error handling
 
