@@ -186,10 +186,12 @@ Four models on NanoGPT (DeepSeek V4.1 Flash, Kimi K2.6, Gemma 4 31B and Muse Spa
 | Kimi K2.6 | 4.47 | 3.78 | 4.72 | 3.57 | 4.13 |
 | Gemma 4 31B | 4.45 | 3.30 | 4.62 | 3.50 | 3.97 |
 
-1. **Claude ranks first because it leaves out less.** It isn't the most accurate (DeepSeek is) or the easiest to listen to (Kimi is). The other models write shorter descriptions that miss more.
-2. **The judges agree with the baseline.** The median of the four is within 1 point of the baseline on 98–100% of descriptions, with no overall bias. Kimi is the strictest, about 0.4 below the baseline on average.
+1. **Claude ranks first with every judge, but its lead is clear only over Kimi and Gemma.** Against DeepSeek and Muse Spark the 95% intervals reach zero or nearly do. Its edge is mostly Completeness, and its descriptions are also the longest. DeepSeek is the most accurate and Kimi the easiest to listen to.
+2. **The judges agree moderately with the baseline.** The median of the four matches the baseline exactly on 66% of scores, with a rank correlation of 0.70 and no overall bias. Kimi is the strictest judge, about 0.4 below the baseline on average.
 3. **Self-preference is small.** Gemma scores its own descriptions 0.38 higher than the other judges do, but it is generous in general (+0.26). After allowing for that, no judge favors its own work by more than about 0.1.
-4. **Judges miss errors in the "notable details" list.** On the squad car (v1), only one of four judges caught the wrong event guess at the end of that list.
+4. **Judges miss errors in the "notable details" list.** On the squad car (v1), only one of four judges marked down the wrong event guess at the end of that list.
+
+The full write-up, with intervals, per-judge statistics and two photos examined closely, is in [docs/WRITEUP.md](docs/WRITEUP.md).
 
 ### What I'd change next
 
